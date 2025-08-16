@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Choices Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --max-width: 1000px; --gap: 14px; --radius: 10px;
+      --muted:#6b7280; --ok:#0a7f2e; --bad:#b00020; --accent:#2563eb;
+      --bg:#0b1324; --card:#111827; --text:#e5e7eb; --border:#1f2937; --chip:#374151;
+    }
+    html, body { background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; margin:0; }
+    .wrap { max-width:var(--max-width); margin:32px auto; padding:0 16px 64px; }
+    h1 { margin:8px 0 18px; font-size:1.8rem; }
+    h2 { font-size:1.2rem; margin:24px 0 12px; }
+    section,.card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin-bottom:16px; }
+    .row { display:grid; grid-template-columns: 1fr auto auto auto; gap:10px; align-items:center; padding:10px; border-radius:8px; }
+    .row:nth-child(odd){ background:rgba(255,255,255,0.02); }
+    .row.expired{ opacity:.55; }
+    .label{ font-weight:600; }
+    .muted{ color:var(--muted); font-size:.9rem; }
+    .chip{ display:inline-block; padding:2px 8px; border-radius:999px; background:var(--chip); font-size:.8rem; }
+    .chip.expired{ background:#4b5563; }
+    .chip.mandatory{ background:#334155; font-weight:600; }
+    .answers{ display:flex; gap:10px; }
+    .answers label{ display:inline-flex; align-items:center; gap:6px; cursor:pointer; }
+    .clear-btn{ border:1px solid var(--border); background:transparent; color:var(--muted); border-radius:6px; padding:4px 8px; font-size:.85rem; cursor:pointer; }
+    .clear-btn:hover{ color:var(--text); border-color:var(--chip); }
+    .counts{ display:inline-flex; gap:10px; margin-left:8px; }
+    .counts .chip{ background:#1f2937; }
+    .ok{ color:var(--ok); } .bad{ color:var(--bad); }
+    .grid-2{ display:grid; gap:16px; grid-template-columns:1fr; }
+    @media (min-width: 900px){ .grid-2{ grid-template-columns:1fr 1fr; } }
+    .errors ul{ margin:8px 0 0; padding-left:20px; } .errors li{ margin-bottom:6px; }
+    .summary-list{ margin:0; padding-left:18px; }
+    .sticky-footer{ position:sticky; bottom:0; background:rgba(11,19,36,.9); backdrop-filter:blur(6px); border-top:1px solid var(--border); padding:12px 0; }
+    .actions{ display:flex; gap:10px; align-items:center; }
+    .btn{ background:var(--accent); border:none; color:white; padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:600; }
+    .btn[disabled]{ opacity:.5; cursor:not-allowed; }
+    .note{ font-size:.9rem; color:var(--muted); }
+    .name-select, .email-input{ width:100%; background:transparent; border:1px solid var(--border); color:var(--text); border-radius:8px; padding:10px; }
+    .soft{ font-weight:500; color:var(--muted); } .small{ font-size:.85rem; }
+    .hdr{ display:flex; flex-wrap:wrap; gap:8px; align-items:baseline; justify-content:space-between; }
+    .two-col { display:grid; gap:12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px){ .two-col{ grid-template-columns:1fr 1fr; } }
+  </style>
+  <!-- EmailJS (client-side email) -->
+  <script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40emailjs%2Fbrowser%404%2Fdist%2Femail.min.js&data=05%7C02%7Cdan.fox%40brighthousefinancial.com%7C766f7e9b1a0e402b452908dddd138c0f%7C2658e698ac384347a56f3f96a6bfa8ff%7C0%7C0%7C638909798234174585%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=BT%2FKFYbllGLRQfzQfG2qi3Q6wFhZ7UFK1Ro97P9d2%2FY%3D&reserved=0"></script>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Selections</h1>
+
+    <!-- Name + Email -->
+    <section class="card">
+      <h2>Participant</h2>
+      <div class="two-col">
+        <div>
+          <label for="name" class="small muted">Choose your name</label>
+          <select id="name" class="name-select" aria-label="Choose your name">
+            <option value="">— Select your name —</option>
+            <!-- Edit these names -->
+            <option>Dan Fox</option>
+            <option>Alex Rivera</option>
+            <option>Jamie Lee</option>
+            <option>Casey Morgan</option>
+          </select>
+        </div>
+        <div>
+          <label for="email" class="small muted">Your email (auto-filled by name; editable if blank)</label>
+          <input id="email" class="email-input" type="email" placeholder="you@example.com" />
+        </div>
+      </div>
+      <p class="note small">A single email will be sent to the organizer and you’ll be CC’d.</p>
+    </section>
+
+    <!-- Sections A & B -->
+    <div class="grid-2">
+      <section class="card" id="sectionA">
+        <div class="hdr">
+          <h2>Section A <span class="soft">(16 options; first is mandatory)</span></h2>
+          <div class="counts"><span class="chip" id="countA">Answered: 0 / 16</span></div>
+        </div>
+        <div id="listA"></div>
+      </section>
+
+      <section class="card" id="sectionB">
+        <div class="hdr">
+          <h2>Section B <span class="soft">(50 options; first is mandatory)</span></h2>
+          <div class="counts"><span class="chip" id="countB">Answered: 0 / 50</span></div>
+        </div>
+        <div id="listB"></div>
+      </section>
+    </div>
+
+    <!-- Errors / checklist -->
+    <section class="card errors" id="errors">
+      <h2>Checks & Errors</h2>
+      <ul id="errorList" class="small"></ul>
+      <p class="note">Rules: pick your name & email; answer A1 and B1; answer ≥3 in A and ≥3 in B; total between 7 and 12.</p>
+    </section>
+
+    <!-- Summary -->
+    <section class="card">
+      <h2>Summary of Chosen Answers</h2>
+      <div id="summary"><p class="muted small">Your selections will appear here.</p></div>
+    </section>
+
+    <!-- Footer actions -->
+    <div class="sticky-footer">
+      <div class="hdr" style="align-items:center;">
+        <div class="actions">
+          <button id="submitBtn" class="btn">Submit</button>
+          <button id="resetBtn" class="clear-btn">Reset All</button>
+        </div>
+        <div>
+          <span class="chip" id="totalCount">Total answered: 0</span>
+          <span class="chip" id="limitNotice">Max allowed: 12</span>
+        </div>
+      </div>
+      <p class="note">Organizer email: <strong>wrathofmath85@gmail.com</strong>. Uses EmailJS for automatic email (with CC to participant).</p>
+    </div>
+  </div>
+
+  <script>
+    /************ CONFIG ************/
+    // Name → Email directory (edit as needed)
+    const NAME_EMAILS = {
+      "Dan Fox": "dan@example.com",
+      "Alex Rivera": "alex@example.com",
+      "Jamie Lee": "jamie@example.com",
+      "Casey Morgan": "casey@example.com"
+    };
+
+    // Deadlines (ISO "YYYY-MM-DDTHH:mm"). Past = disabled.
+    const DEFAULT_DEADLINE_A = "2025-12-31T23:59";
+    const DEFAULT_DEADLINE_B = "2025-12-31T23:59";
+
+    // EmailJS credentials (get these from app.emailjs.com)
+    const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
+    const EMAILJS_TEMPLATE_ID = "YOUR_SINGLE_TEMPLATE_ID"; // this template sends to you and CCs the participant
+    const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+
+    // Organizer email (for payload clarity; your template "To" is set in EmailJS)
+    const ORGANIZER_EMAIL = "wrathofmath85@gmail.com";
+
+    /************ DATA ************/
+    const questionsA = Array.from({ length: 16 }, (_, i) => ({
+      id: `A${i+1}`, text: `Question A${i+1}`, deadline: DEFAULT_DEADLINE_A, mandatory: i === 0
+    }));
+    const questionsB = Array.from({ length: 50 }, (_, i) => ({
+      id: `B${i+1}`, text: `Question B${i+1}`, deadline: DEFAULT_DEADLINE_B, mandatory: i === 0
+    }));
+
+    /************ RENDER ************/
+    const listA = document.getElementById('listA');
+    const listB = document.getElementById('listB');
+    function renderSection(listEl, items) {
+      items.forEach(q => {
+        const row = document.createElement('div');
+        row.className = 'row';
+        row.dataset.deadline = q.deadline;
+        row.dataset.qid = q.id;
+        row.dataset.section = q.id[0];
+        row.innerHTML = `
+          <div>
+            <div class="label">${q.text}</div>
+            <div class="muted small">Deadline: <span class="deadline">${escapeHtml(q.deadline)}</span></div>
+          </div>
+          <div class="chip ${q.mandatory ? 'mandatory' : ''}">${q.mandatory ? 'Mandatory' : 'Optional'}</div>
+          <div class="answers">
+            <label><input type="radio" name="${q.id}" value="A" /> A</label>
+            <label><input type="radio" name="${q.id}" value="B" /> B</label>
+          </div>
+          <div><button type="button" class="clear-btn" data-clear="${q.id}">Clear</button></div>
+        `;
+        listEl.appendChild(row);
+      });
+    }
+    renderSection(listA, questionsA);
+    renderSection(listB, questionsB);
+
+    /************ UTILS ************/
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+    }
+    function isExpired(deadlineStr) {
+      if (!deadlineStr) return false;
+      const d = new Date(deadlineStr);
+      if (isNaN(d)) return false;
+      return new Date() > d;
+    }
+    function getAllRows(){ return Array.from(document.querySelectorAll('.row')); }
+    function getCheckedAnswers(){
+      const map = new Map();
+      getAllRows().forEach(row => {
+        const qid = row.dataset.qid;
+        const checked = row.querySelector('input[type=radio]:checked');
+        if (checked) map.set(qid, checked.value);
+      });
+      return map;
+    }
+    function countBySection(answers){
+      let a=0,b=0;
+      for (const key of answers.keys()){
+        if (key.startsWith('A')) a++;
+        if (key.startsWith('B')) b++;
+      }
+      return { a, b, total: a+b };
+    }
+    function updateCounts(){
+      const answers = getCheckedAnswers();
+      const {a,b,total} = countBySection(answers);
+      document.getElementById('countA').textContent = `Answered: ${a} / 16`;
+      document.getElementById('countB').textContent = `Answered: ${b} / 50`;
+      document.getElementById('totalCount').textContent = `Total answered: ${total}`;
+    }
+    function refreshExpiry(){
+      getAllRows().forEach(row => {
+        const expired = isExpired(row.dataset.deadline);
+        row.classList.toggle('expired', expired);
+        row.querySelectorAll('input[type=radio]').forEach(r => r.disabled = expired);
+        let chip = row.querySelector('.chip.expired-mark');
+        if (expired && !chip){
+          chip = document.createElement('span');
+          chip.className = 'chip expired expired-mark';
+          chip.textContent = 'Expired';
+          row.children[1].insertAdjacentElement('afterend', chip);
+        } else if (!expired && chip){ chip.remove(); }
+      });
+    }
+    function enforceMaxSelections(maxAllowed=12){
+      const answers = getCheckedAnswers();
+      const { total } = countBySection(answers);
+      const rows = getAllRows();
+      if (total >= maxAllowed){
+        rows.forEach(row => {
+          const qid = row.dataset.qid;
+          const radios = row.querySelectorAll('input[type=radio]');
+          const selected = answers.has(qid);
+          radios.forEach(r => { if (!selected && !r.checked) r.disabled = true; });
+        });
+        document.getElementById('limitNotice').textContent = `Max reached: ${maxAllowed}`;
+      } else {
+        rows.forEach(row => {
+          const expired = row.classList.contains('expired');
+          row.querySelectorAll('input[type=radio]').forEach(r => r.disabled = expired);
+        });
+        document.getElementById('limitNotice').textContent = `Max allowed: ${maxAllowed}`;
+      }
+    }
+    function updateSummary(){
+      const container = document.getElementById('summary');
+      const answers = getCheckedAnswers();
+      if (answers.size === 0){
+        container.innerHTML = `<p class="muted small">Your selections will appear here.</p>`;
+        return;
+      }
+      const chosenA=[], chosenB=[];
+      for (const [qid,val] of answers.entries()){
+        const label = document.querySelector(`.row[data-qid="${qid}"] .label`)?.textContent || qid;
+        (qid.startsWith('A')?chosenA:chosenB).push({qid,label,val});
+      }
+      chosenA.sort((x,y)=> x.qid.localeCompare(y.qid));
+      chosenB.sort((x,y)=> x.qid.localeCompare(y.qid));
+      const renderList = (title, arr) => `
+        <h3>${title}</h3>
+        ${arr.length ? `<ol class="summary-list">${arr.map(x=>`<li><strong>${escapeHtml(x.label)}:</strong> ${escapeHtml(x.val)}</li>`).join('')}</ol>` : `<p class="muted small">None selected.</p>`}
+      `;
+      container.innerHTML = renderList('Section A', chosenA) + renderList('Section B', chosenB);
+    }
+    function buildEmailBody(name, email, answersMap){
+      const keys = Array.from(answersMap.keys()).sort((a,b)=>{
+        if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
+        return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
+      });
+      const lines = [];
+      lines.push(`Name: ${name}`);
+      lines.push(`Email: ${email}`);
+      lines.push(`Timestamp: ${new Date().toString()}`);
+      lines.push('');
+      lines.push('Selections:');
+      keys.forEach(k=>{
+        const row = document.querySelector(`.row[data-qid="${k}"]`);
+        const label = row?.querySelector('.label')?.textContent || k;
+        const v = answersMap.get(k);
+        const deadline = row?.dataset.deadline || '';
+        lines.push(`- ${label}: ${v} (deadline ${deadline})`);
+      });
+      return lines.join('\n');
+    }
+    function validateAll(){
+      const errors = [];
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const answers = getCheckedAnswers();
+      const {a,b,total} = countBySection(answers);
+      const A1 = document.querySelector('input[name="A1"]:checked');
+      const B1 = document.querySelector('input[name="B1"]:checked');
+      const checklist = [];
+
+      if (name) checklist.push('✅ Name selected'); else { checklist.push('❌ Name not selected'); errors.push('Please choose your name.'); }
+      if (email && /\S+@\S+\.\S+/.test(email)) checklist.push('✅ Valid email provided'); else { checklist.push('❌ Email missing/invalid'); errors.push('Enter a valid email.'); }
+      if (A1) checklist.push('✅ Section A, Q1 answered'); else { checklist.push('❌ Section A, Q1 not answered'); errors.push('Answer Section A question 1.'); }
+      if (B1) checklist.push('✅ Section B, Q1 answered'); else { checklist.push('❌ Section B, Q1 not answered'); errors.push('Answer Section B question 1.'); }
+      if (a >= 3) checklist.push('✅ ≥3 answers in Section A'); else { checklist.push(`❌ Only ${a} in Section A`); errors.push('Answer at least 3 questions in Section A.'); }
+      if (b >= 3) checklist.push('✅ ≥3 answers in Section B'); else { checklist.push(`❌ Only ${b} in Section B`); errors.push('Answer at least 3 questions in Section B.'); }
+      if (total >= 7 && total <= 12) checklist.push(`✅ Total between 7 and 12 (now ${total})`);
+      else {
+        if (total < 7) { checklist.push(`❌ Total too low (${total}/7)`); errors.push('Answer at least 7 questions overall.'); }
+        if (total > 12){ checklist.push(`❌ Total too high (${total}/12)`); errors.push('Answer no more than 12 questions overall.'); }
+      }
+
+      const ul = document.getElementById('errorList');
+      ul.innerHTML = '';
+      checklist.forEach(msg=>{
+        const li = document.createElement('li');
+        li.textContent = msg;
+        li.className = msg.startsWith('✅') ? 'ok' : 'bad';
+        ul.appendChild(li);
+      });
+
+      return { valid: errors.length===0, name, email, answers, emailText: buildEmailBody(name, email, answers) };
+    }
+    function clearQuestion(qid){
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(r => r.checked=false);
+      onChange();
+    }
+    function resetAll(){
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.querySelectorAll('input[type=radio]').forEach(r => r.checked=false);
+      onChange();
+      window.scrollTo({ top:0, behavior:'smooth' });
+    }
+
+    /************ EVENTS ************/
+    function onChange(){
+      refreshExpiry(); updateCounts(); enforceMaxSelections(12); updateSummary(); validateAll();
+    }
+    document.addEventListener('change', e=>{
+      if (e.target.matches('#name')){
+        const n = e.target.value.trim();
+        const emailInput = document.getElementById('email');
+        const mapped = NAME_EMAILS[n];
+        if (mapped){ emailInput.value = mapped; }
+      }
+      if (e.target.matches('#name, #email, input[type=radio]')) onChange();
+    });
+    document.addEventListener('click', e=>{
+      if (e.target.matches('[data-clear]')){ clearQuestion(e.target.getAttribute('data-clear')); }
+    });
+    document.getElementById('resetBtn').addEventListener('click', resetAll);
+
+    // EmailJS init
+    document.addEventListener('DOMContentLoaded', () => {
+      if (EMAILJS_PUBLIC_KEY && emailjs) {
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+      }
+      // initial draws
+      refreshExpiry(); updateCounts(); enforceMaxSelections(12); updateSummary(); validateAll();
+    });
+
+    // Submit = single email (to organizer, CC participant via EmailJS template settings)
+    document.getElementById('submitBtn').addEventListener('click', async (e)=>{
+      e.preventDefault();
+      const { valid, name, email, emailText } = validateAll();
+      if (!valid){ alert('Please fix the items in “Checks & Errors” before submitting.'); return; }
+
+      const params = {
+        organizer_email: ORGANIZER_EMAIL, // optional var you can reference in template body
+        participant_name: name,
+        participant_email: email,         // used by EmailJS template in the CC field
+        selections_text: emailText
+      };
+
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+        alert('Submitted! Email sent to organizer and CC’d to participant.');
+      } catch (err){
+        console.error('EmailJS error:', err);
+        alert('There was an error sending the email. Please try again.');
+      }
+    });
+
+    // periodic expiry refresh (if page stays open)
+    setInterval(()=>{ refreshExpiry(); updateCounts(); enforceMaxSelections(12); updateSummary(); validateAll(); }, 60000);
+  </script>
+</body>
+</html>
