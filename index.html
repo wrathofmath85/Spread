@@ -50,7 +50,7 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>Selections</h1>
+    <h1>Spread Pool Week 1</h1>
 
     <!-- Name + Email -->
     <section class="card">
@@ -61,15 +61,83 @@
           <select id="name" class="name-select" aria-label="Choose your name">
             <option value="">— Select your name —</option>
             <!-- Edit these names -->
-            <option>Dan Fox</option>
-            <option>Alex Rivera</option>
-            <option>Jamie Lee</option>
-            <option>Casey Morgan</option>
+            <option>Ben Abels</option>
+<option>Brian Allardt</option>
+<option>TexChris Anderson</option>
+<option>Ray Ball</option>
+<option>Lowell Bittinger</option>
+<option>Dennis Blair</option>
+<option>Tom Cange</option>
+<option>Head Cheese</option>
+<option>Joe Choma</option>
+<option>Doug Cooper</option>
+<option>Hayden Cooper</option>
+<option>Ryan Cox</option>
+<option>Justin Cure</option>
+<option>Mark Dalesandro</option>
+<option>Brian Dillow</option>
+<option>Kent Dinius</option>
+<option>Jeff Drlik</option>
+<option>Noah Drlik</option>
+<option>Scott Drlik</option>
+<option>Brady Drlik</option>
+<option>Tim Elkin</option>
+<option>Nick Erickson</option>
+<option>Nathan Faciane</option>
+<option>Connor Flavin</option>
+<option>Dan Fox</option>
+<option>Brad Gray</option>
+<option>Jeff Hobbs</option>
+<option>Laura Hobbs</option>
+<option>Chris Jerrell</option>
+<option>Jason Johns</option>
+<option>Rich Kearns</option>
+<option>Dustin Kelso</option>
+<option>Sam Knoop</option>
+<option>Brett Kramer</option>
+<option>Foxy Lady</option>
+<option>Rick Lambert</option>
+<option>Byron Lin</option>
+<option>Lance Lorah</option>
+<option>Dave Mallory</option>
+<option>Steve McAnnally</option>
+<option>Nolan McCarthy</option>
+<option>Jamie McDermott</option>
+<option>Brad Meadows</option>
+<option>Phil Michael</option>
+<option>Matt Mitcham</option>
+<option>Jason Murray</option>
+<option>Alex Nelson</option>
+<option>Chase Perry</option>
+<option>Chris Rexroat</option>
+<option>Michael Rodine</option>
+<option>Tom Roman</option>
+<option>Dave Ross</option>
+<option>Rowdy Rudd</option>
+<option>Brandon Rychener</option>
+<option>Brian Scherrer</option>
+<option>Eric Scherrer</option>
+<option>Joel Scherrer</option>
+<option>Reed Scherrer</option>
+<option>Josh Shirey</option>
+<option>Mark Sirovica</option>
+<option>Bob Swisher</option>
+<option>Bill Thomas</option>
+<option>Miguel Torres</option>
+<option>Terry Toth</option>
+<option>Blake Vanderbush</option>
+<option>Matt Verbit</option>
+<option>Blake Walker</option>
+<option>Chad Whitaker</option>
+<option>Zach Wood</option>
+<option>Keith Zalewski</option>
+
           </select>
         </div>
         <div>
           <label for="email" class="small muted">Your email (auto-filled by name; editable if blank)</label>
           <input id="email" class="email-input" type="email" placeholder="you@example.com" />
+
         </div>
       </div>
       <p class="note small">A single email will be sent to the organizer and you’ll be CC’d.</p>
@@ -79,16 +147,16 @@
     <div class="grid-2">
       <section class="card" id="sectionA">
         <div class="hdr">
-          <h2>Section A <span class="soft">(16 options; first is mandatory)</span></h2>
-          <div class="counts"><span class="chip" id="countA">Answered: 0 / 16</span></div>
+          <h2>NFL <span class="soft">(First is mandatory)</span></h2>
+          <div class="counts"><span class="chip" id="countA">Answered: 0</span></div>
         </div>
         <div id="listA"></div>
       </section>
 
       <section class="card" id="sectionB">
         <div class="hdr">
-          <h2>Section B <span class="soft">(50 options; first is mandatory)</span></h2>
-          <div class="counts"><span class="chip" id="countB">Answered: 0 / 50</span></div>
+          <h2>NCAA <span class="soft">(First is mandatory)</span></h2>
+          <div class="counts"><span class="chip" id="countB">Answered: 0</span></div>
         </div>
         <div id="listB"></div>
       </section>
@@ -127,10 +195,77 @@
     /************ CONFIG ************/
     // Name → Email directory (edit as needed)
     const NAME_EMAILS = {
-      "Dan Fox": "dan@example.com",
-      "Alex Rivera": "alex@example.com",
-      "Jamie Lee": "jamie@example.com",
-      "Casey Morgan": "casey@example.com"
+      "Ben Abels": "babels1017@aol.com",
+"Brian Allardt": "ballardt@cbcregroup.com",
+"TexChris Anderson": "christopher.a.anderson@hotmail.com",
+"Ray Ball": "captray60@gmail.com",
+"Lowell Bittinger": "lowell.bittinger@mail.com",
+"Dennis Blair": "denblair01@aol.com",
+"Tom Cange": "iu_sucks@msn.com",
+"Head Cheese": "phil.michael88@yahoo.com",
+"Joe Choma": "joechoma53@gmail.com",
+"Doug Cooper": "xboiler@hotmail.com",
+"Hayden Cooper": "haydendc99@gmail.com",
+"Ryan Cox": "mrcox10@hotmail.com",
+"Justin Cure": "jcure@hertz.com",
+"Mark Dalesandro": "Mjodalesandro@gmail.com   ",
+"Brian Dillow": "brian.dillow@cnoinc.com",
+"Kent Dinius": "kent.dinius@cnoinc.com",
+"Jeff Drlik": "jnjdrlik@hotmail.com",
+"Noah Drlik": "ndrlik11@gmail.com",
+"Scott Drlik": "SCOTT.DRLIK@CNOinc.com",
+"Brady Drlik": "bdrlik16@gmail.com",
+"Tim Elkin": "tcelkin@sbcglobal.net",
+"Nick Erickson": "njericks@gmail.com",
+"Nathan Faciane": "nathan.faciane@brighthousefinancial.com",
+"Connor Flavin": "connor.flavin@cnoinc.com",
+"Dan Fox": "wrathofmath85@gmail.com",
+"Brad Gray": "blgray317@gmail.com",
+"Jeff Hobbs": "jeffrey.k.hobbs@gmail.com",
+"Laura Hobbs": "lemoyles@gmail.com",
+"Chris Jerrell": "CHRIS.JERRELL@CNOinc.com",
+"Jason Johns": "jason.c.johns@me.com",
+"Rich Kearns": "rkearns229@gmail.com",
+"Dustin Kelso": "DUSTIN.KELSO@CNOinc.com",
+"Sam Knoop": "sam.knoop@aiinnovations.com",
+"Brett Kramer": "br_kramer@yahoo.com",
+"Foxy Lady": "wrathofmath85@gmail.com",
+"Rick Lambert": "ricklambert24@gmail.com",
+"Byron Lin": "Byron.Lin@CNOinc.com",
+"Lance Lorah": "lance.lorah@gmail.com",
+"Dave Mallory": "mallory503@gmail.com",
+"Steve McAnnally": "smcannally@gmail.com",
+"Nolan McCarthy": "ngmccarthy@gmail.com",
+"Jamie McDermott": "Jamie.McDermott@RaymondJames.com",
+"Brad Meadows": "Bradley.Meadows@CNOinc.com",
+"Phil Michael": "phil.michael@cnoinc.com",
+"Matt Mitcham": "MATTHEW.MITCHAM@CNOinc.com",
+"Jason Murray": "jmurray1290@gmail.com",
+"Alex Nelson": "alexander.nelson@CNOinc.com",
+"Chase Perry": "Clperry23@gmail.com",
+"Chris Rexroat": "chris.rexroat@yahoo.com",
+"Michael Rodine": "mrodine@gmail.com",
+"Tom Roman": "tom.roman55@outlook.com",
+"Dave Ross": "ncadaveross@gmail.com",
+"Rowdy Rudd": "rowdy.rudd@gmail.com",
+"Brandon Rychener": "b_rychener@yahoo.com",
+"Brian Scherrer": "scherrerbe@gmail.com",
+"Eric Scherrer": "erscherrer@comcast.net",
+"Joel Scherrer": "JMscherrer@comcast.net",
+"Reed Scherrer": "Reed.Scherrer@animalhealthinternational.com",
+"Josh Shirey": "joshcshirey@gmail.com",
+"Mark Sirovica": "msirovica@gmail.com",
+"Bob Swisher": "robert.m.swisher@gmail.com",
+"Bill Thomas": "Bill.Thomas@homedefenders.com",
+"Miguel Torres": "miguel.torres@cnoinc.com",
+"Terry Toth": "terrytoth12@yahoo.com",
+"Blake Vanderbush": "blakevanderbush@gmail.com",
+"Matt Verbit": "M.verbit@yahoo.com",
+"Blake Walker": "Blake.Walker@CNOinc.com",
+"Chad Whitaker": "chadawhitaker@gmail.com",
+"Zach Wood": "zwood20@gmail.com",
+"Keith Zalewski": "keith.r.zalewski@gmail.com"
+
     };
 
     // Deadlines (ISO "YYYY-MM-DDTHH:mm"). Past = disabled.
