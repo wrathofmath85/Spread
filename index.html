@@ -44,15 +44,18 @@
     .hdr{ display:flex; flex-wrap:wrap; gap:8px; align-items:baseline; justify-content:space-between; }
     .two-col { display:grid; gap:12px; grid-template-columns: 1fr; }
     @media (min-width: 640px){ .two-col{ grid-template-columns:1fr 1fr; } }
-	.status{
- 		display:inline-block; padding:10px 14px; border-radius:12px; font-weight:800;
- 		letter-spacing:.5px; border:1px solid var(--border);
-		}
-	.status.bad{ background:#7f1d1d; color:#fff; }        /* red box */
-	.status.good{ background:#1e3a8a; color:orange; }     /* blue box w/ orange text */
+
+    /* STATUS BOX (your request) */
+    .status{
+      display:inline-block; padding:10px 14px; border-radius:12px; font-weight:800;
+      letter-spacing:.5px; border:1px solid var(--border);
+    }
+    .status.bad{ background:#7f1d1d; color:#fff; }        /* red box */
+    .status.good{ background:#1e3a8a; color:orange; }     /* blue box w/ orange text */
   </style>
+
   <!-- EmailJS (client-side email) -->
-  <script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40emailjs%2Fbrowser%404%2Fdist%2Femail.min.js&data=05%7C02%7Cdan.fox%40brighthousefinancial.com%7Cd18f21b77f5742b1f1c708dddd19cdd7%7C2658e698ac384347a56f3f96a6bfa8ff%7C0%7C0%7C638909825094513578%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=b6LYnDIlYdAvEUV0gJ4a9JSofJ8TCLPAg0wN5OyLUP4%3D&reserved=0"></script>
+  <script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40emailjs%2Fbrowser%404%2Fdist%2Femail.min.js&data=05%7C02%7Cdan.fox%40brighthousefinancial.com%7C6a33412b08cb414148fb08dddd8bc602%7C2658e698ac384347a56f3f96a6bfa8ff%7C0%7C0%7C638910314604709006%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=7gmWT4wSjhZzhuIoli8NO3Pk8AM4HqEIfDN3cFiS%2Ftk%3D&reserved=0"></script>
 </head>
 <body>
   <div class="wrap">
@@ -67,7 +70,7 @@
           <select id="name" class="name-select" aria-label="Choose your name">
             <option value="">— Select your name —</option>
             <!-- Edit these names -->
-            <option>Ben Abels</option>
+             <option>Ben Abels</option>
 <option>Brian Allardt</option>
 <option>TexChris Anderson</option>
 <option>Ray Ball</option>
@@ -138,6 +141,7 @@
 <option>Zach Wood</option>
 <option>Keith Zalewski</option>
 
+
           </select>
         </div>
         <div>
@@ -152,7 +156,7 @@
     <div class="grid-2">
       <section class="card" id="sectionA">
         <div class="hdr">
-          <h2>NFL <span class="soft">(First Game Mandatory)</span></h2>
+          <h2>Section A <span class="soft">(16 items; A1 mandatory by default)</span></h2>
           <div class="counts"><span class="chip" id="countA">Answered: 0 / 16</span></div>
         </div>
         <div id="listA"></div>
@@ -160,7 +164,7 @@
 
       <section class="card" id="sectionB">
         <div class="hdr">
-          <h2>NCAA <span class="soft">(First Game Mandatory)</span></h2>
+          <h2>Section B <span class="soft">(50 items; B1 mandatory by default)</span></h2>
           <div class="counts"><span class="chip" id="countB">Answered: 0 / 50</span></div>
         </div>
         <div id="listB"></div>
@@ -174,7 +178,7 @@
       <select id="doubleSelect" class="double-select">
         <option value="">— No double —</option>
       </select>
-      <p id="doubleHint" class="muted small" style="margin-top:8px;">The list populates after you’ve selected answers. Only currently selected (and unexpired) questions appear here.</p>
+      <p id="doubleHint" class="muted small" style="margin-top:8px;">Only currently selected (and unexpired) questions appear here.</p>
     </section>
 
     <!-- Errors -->
@@ -198,8 +202,9 @@
           <button id="resetBtn" class="clear-btn">Reset All</button>
         </div>
         <div>
-		<span id="statusBox" class="status bad" role="status" aria-live="polite">ERRORS DETECTED</span>
-	</div>
+          <!-- Status box replaces the two chips -->
+          <span id="statusBox" class="status bad" role="status" aria-live="polite">ERRORS DETECTED</span>
+        </div>
       </div>
       <p class="note">Organizer: <strong>wrathofmath85@gmail.com</strong> • EmailJS (single send, CC participant).</p>
     </div>
@@ -284,20 +289,18 @@
     };
 
     // EmailJS credentials (from app.emailjs.com)
-    const EMAILJS_SERVICE_ID  = "service_txqdfck";
-    	   const EMAILJS_TEMPLATE_ID = "template_o8du7pt"; // this template sends to you and CCs the participant
-    	   const EMAILJS_PUBLIC_KEY  = "w4UC6ofDTC0VdRI44";
-
+    const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
+    const EMAILJS_TEMPLATE_ID = "YOUR_SINGLE_TEMPLATE_ID"; // template "To" = you; "CC" = {{participant_email}}
+    const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
     const ORGANIZER_EMAIL     = "wrathofmath85@gmail.com"; // optional to include in email body
 
     // ===== Editable Questions =====
     // Each question: { id, text, choices: [..labels..], deadline: "YYYY-MM-DDTHH:mm", mandatory: boolean }
-    // Tip: choices can be any strings (e.g., ["Team Red","Team Blue"]).
     const DEFAULT_DEADLINE_A = "2025-12-31T23:59";
     const DEFAULT_DEADLINE_B = "2025-12-31T23:59";
 
     const questionsA = [
-     { id:"A1", text:"Raiders @ Cardinals (-7) Saturday @ 10:00 PM - NFL+", choices:["Raiders","Cardinals (-7)"], deadline:"2025-08-23T22:0", mandatory:true },
+      { id:"A1", text:"Raiders @ Cardinals (-7) Saturday @ 10:00 PM - NFL+", choices:["Raiders","Cardinals (-7)"], deadline:"2025-08-23T22:0", mandatory:true },
 { id:"A2", text:"Steelers (-3) @ Panthers Thursday @ 7:00 PM - NFL+", choices:["Steelers (-3)","Panthers"], deadline:"2025-08-21T19:0", mandatory:false },
 { id:"A3", text:"Patriots @ Giants (-3.5) Thursday @ 8:00 PM - AMZN", choices:["Patriots","Giants (-3.5)"], deadline:"2025-08-21T20:0", mandatory:false },
 { id:"A4", text:"Eagles @ Jets (-7) Friday @ 7:30 PM - 0", choices:["Eagles","Jets (-7)"], deadline:"2025-08-22T19:30", mandatory:false },
@@ -313,8 +316,6 @@
 { id:"A14", text:"Jaguars (-4) @ Dolphins Saturday @ 7:00 PM - NFL+", choices:["Jaguars (-4)","Dolphins"], deadline:"2025-08-23T19:0", mandatory:false },
 { id:"A15", text:"Bills (-3.5) @ Buccaneers Saturday @ 7:30 PM - 0", choices:["Bills (-3.5)","Buccaneers"], deadline:"2025-08-23T19:30", mandatory:false },
 { id:"A16", text:"Chargers (-4.5) @ 49ers Saturday @ 8:30 PM - 0", choices:["Chargers (-4.5)","49ers"], deadline:"2025-08-23T20:30", mandatory:false },
-
-
 
     ];
 
@@ -402,7 +403,7 @@
         row.dataset.qid = q.id;
         row.dataset.section = q.id[0]; // 'A' or 'B'
 
-        const answersHtml = q.choices.map((label,i)=>(
+        const answersHtml = q.choices.map((label)=>(
           `<label><input type="radio" name="${q.id}" value="${escapeAttr(label)}" /> ${escapeHtml(label)}</label>`
         )).join('');
 
@@ -454,10 +455,9 @@
     }
     function updateCounts(){
       const answers = getCheckedAnswers();
-      const {a,b,total} = countBySection(answers);
+      const {a,b} = countBySection(answers);
       document.getElementById('countA').textContent = `Answered: ${a} / 16`;
       document.getElementById('countB').textContent = `Answered: ${b} / 50`;
-      document.getElementById('totalCount').textContent = `Total answered: ${total}`;
     }
     function refreshExpiry(){
       getAllRows().forEach(row => {
@@ -484,13 +484,11 @@
           const selected = answers.has(qid);
           radios.forEach(r => { if (!selected && !r.checked) r.disabled = true; });
         });
-        document.getElementById('limitNotice').textContent = `Max reached: ${maxAllowed}`;
       } else {
         rows.forEach(row => {
           const expired = row.classList.contains('expired');
           row.querySelectorAll('input[type=radio]').forEach(r => r.disabled = expired);
         });
-        document.getElementById('limitNotice').textContent = `Max allowed: ${maxAllowed}`;
       }
     }
 
@@ -500,7 +498,6 @@
       const answers = getCheckedAnswers();
       const prev = doubleSelect.value;
       doubleSelect.innerHTML = `<option value="">— No double —</option>`;
-      // populate with selected (non-expired) questions
       const ids = Array.from(answers.keys()).sort((a,b)=>{
         if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
         return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
@@ -512,16 +509,14 @@
         opt.textContent = `${id} — ${a.labelText}`;
         doubleSelect.appendChild(opt);
       });
-      // preserve previous selection if still valid
       if (prev && answers.has(prev)){ doubleSelect.value = prev; }
-      else if (prev){ doubleSelect.value = ""; } // invalidated
+      else if (prev){ doubleSelect.value = ""; }
     }
-
     function getDoubleSelection(){
       const qid = doubleSelect.value;
       if (!qid) return null;
       const answers = getCheckedAnswers();
-      if (!answers.has(qid)) return null; // must be among current selections
+      if (!answers.has(qid)) return null;
       return { qid, label: answers.get(qid).labelText, value: answers.get(qid).value };
     }
 
@@ -545,7 +540,20 @@
       `;
       const dbl = getDoubleSelection();
       const dblHtml = dbl ? `<p class="chip" style="margin-top:10px;">Double: <strong>${escapeHtml(dbl.qid)} — ${escapeHtml(dbl.label)}</strong> (${escapeHtml(dbl.value)})</p>` : '';
-      container.innerHTML = renderList('NFL Selected', chosenA) + renderList('NCAA Selected', chosenB) + dblHtml;
+      container.innerHTML = renderList('Section A', chosenA) + renderList('Section B', chosenB) + dblHtml;
+    }
+
+    // Footer status box
+    function setStatus(valid){
+      const box = document.getElementById('statusBox');
+      if (!box) return;
+      if (valid){
+        box.textContent = 'BEAR DOWN';
+        box.classList.remove('bad'); box.classList.add('good');
+      } else {
+        box.textContent = 'ERRORS DETECTED';
+        box.classList.remove('good'); box.classList.add('bad');
+      }
     }
 
     function validateAll(){
@@ -588,12 +596,11 @@
         ul.appendChild(li);
       });
 
-	const isValid = errors.length===0;
-		// update footer status
-	setStatus(isValid);
+      const isValid = errors.length===0;
+      setStatus(isValid);
 
       return {
-        valid: errors.length===0,
+        valid: isValid,
         name, email, answers,
         doublePick: dbl,
         emailText: buildEmailBody(name, email, answers, dbl)
@@ -616,7 +623,6 @@
         const row = document.querySelector(`.row[data-qid="${k}"]`);
         const label = row?.querySelector('.label')?.textContent || k;
         const v = answersMap.get(k).value;
-        const deadline = answersMap.get(k).deadline || '';
         const isDouble = (dbl && dbl.qid === k) ? ' [DOUBLE]' : '';
         lines.push(`- ${label}: ${v}${isDouble} (deadline ${deadline})`);
       });
@@ -635,18 +641,6 @@
       onChange();
       window.scrollTo({ top:0, behavior:'smooth' });
     }
-
-    function setStatus(valid){
- 		const box = document.getElementById('statusBox');
- 		if (!box) return;
- 		if (valid){
-   			box.textContent = 'BEAR DOWN';
-   			box.classList.remove('bad'); box.classList.add('good');
- 		} else {
-   			box.textContent = 'ERRORS DETECTED';
-   			box.classList.remove('good'); box.classList.add('bad');
- 		}
-          }
 
     /************ EVENTS ************/
     function onChange(){
