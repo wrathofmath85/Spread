@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Choices Form</title>
+  <title>Selections Form</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -20,10 +20,10 @@
     .row.expired{ opacity:.55; }
     .label{ font-weight:600; }
     .muted{ color:var(--muted); font-size:.9rem; }
-    .chip{ display:inline-block; padding:2px 8px; border-radius:999px; background:var(--chip); font-size:.8rem; }
+    .chip{ display:inline-block; padding:2px 8px; border-radius:999px; background:var(--chip); font-size:.8rem; white-space:nowrap; }
     .chip.expired{ background:#4b5563; }
     .chip.mandatory{ background:#334155; font-weight:600; }
-    .answers{ display:flex; gap:10px; }
+    .answers{ display:flex; gap:10px; flex-wrap:wrap; }
     .answers label{ display:inline-flex; align-items:center; gap:6px; cursor:pointer; }
     .clear-btn{ border:1px solid var(--border); background:transparent; color:var(--muted); border-radius:6px; padding:4px 8px; font-size:.85rem; cursor:pointer; }
     .clear-btn:hover{ color:var(--text); border-color:var(--chip); }
@@ -39,20 +39,20 @@
     .btn{ background:var(--accent); border:none; color:white; padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:600; }
     .btn[disabled]{ opacity:.5; cursor:not-allowed; }
     .note{ font-size:.9rem; color:var(--muted); }
-    .name-select, .email-input{ width:100%; background:transparent; border:1px solid var(--border); color:var(--text); border-radius:8px; padding:10px; }
+    .name-select, .email-input, .double-select { width:100%; background:transparent; border:1px solid var(--border); color:var(--text); border-radius:8px; padding:10px; }
     .soft{ font-weight:500; color:var(--muted); } .small{ font-size:.85rem; }
     .hdr{ display:flex; flex-wrap:wrap; gap:8px; align-items:baseline; justify-content:space-between; }
     .two-col { display:grid; gap:12px; grid-template-columns: 1fr; }
     @media (min-width: 640px){ .two-col{ grid-template-columns:1fr 1fr; } }
   </style>
   <!-- EmailJS (client-side email) -->
-  <script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40emailjs%2Fbrowser%404%2Fdist%2Femail.min.js&data=05%7C02%7Cdan.fox%40brighthousefinancial.com%7C766f7e9b1a0e402b452908dddd138c0f%7C2658e698ac384347a56f3f96a6bfa8ff%7C0%7C0%7C638909798234174585%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=BT%2FKFYbllGLRQfzQfG2qi3Q6wFhZ7UFK1Ro97P9d2%2FY%3D&reserved=0"></script>
+  <script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40emailjs%2Fbrowser%404%2Fdist%2Femail.min.js&data=05%7C02%7Cdan.fox%40brighthousefinancial.com%7Cd18f21b77f5742b1f1c708dddd19cdd7%7C2658e698ac384347a56f3f96a6bfa8ff%7C0%7C0%7C638909825094513578%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=b6LYnDIlYdAvEUV0gJ4a9JSofJ8TCLPAg0wN5OyLUP4%3D&reserved=0"></script>
 </head>
 <body>
   <div class="wrap">
     <h1>Spread Pool Week 1</h1>
 
-    <!-- Name + Email -->
+    <!-- Participant -->
     <section class="card">
       <h2>Participant</h2>
       <div class="two-col">
@@ -135,38 +135,47 @@
           </select>
         </div>
         <div>
-          <label for="email" class="small muted">Your email (auto-filled by name; editable if blank)</label>
+          <label for="email" class="small muted">Your email (auto-filled; editable)</label>
           <input id="email" class="email-input" type="email" placeholder="you@example.com" />
-
         </div>
       </div>
-      <p class="note small">A single email will be sent to the organizer and you’ll be CC’d.</p>
+      <p class="note small">One email is sent to the organizer and you’ll be CC’d.</p>
     </section>
 
     <!-- Sections A & B -->
     <div class="grid-2">
       <section class="card" id="sectionA">
         <div class="hdr">
-          <h2>NFL <span class="soft">(First is mandatory)</span></h2>
-          <div class="counts"><span class="chip" id="countA">Answered: 0</span></div>
+          <h2>NFL <span class="soft">(16 items; A1 mandatory by default)</span></h2>
+          <div class="counts"><span class="chip" id="countA">Answered: 0 / 16</span></div>
         </div>
         <div id="listA"></div>
       </section>
 
       <section class="card" id="sectionB">
         <div class="hdr">
-          <h2>NCAA <span class="soft">(First is mandatory)</span></h2>
-          <div class="counts"><span class="chip" id="countB">Answered: 0</span></div>
+          <h2>NCAA <span class="soft">(50 items; B1 mandatory by default)</span></h2>
+          <div class="counts"><span class="chip" id="countB">Answered: 0 / 50</span></div>
         </div>
         <div id="listB"></div>
       </section>
     </div>
 
-    <!-- Errors / checklist -->
+    <!-- Double -->
+    <section class="card" id="doubleCard">
+      <h2>Optional: Choose One “Double”</h2>
+      <p class="note small">You may pick exactly one of your selected answers to count as a “double.” (Optional.)</p>
+      <select id="doubleSelect" class="double-select">
+        <option value="">— No double —</option>
+      </select>
+      <p id="doubleHint" class="muted small" style="margin-top:8px;">The list populates after you’ve selected answers. Only currently selected (and unexpired) questions appear here.</p>
+    </section>
+
+    <!-- Errors -->
     <section class="card errors" id="errors">
       <h2>Checks & Errors</h2>
       <ul id="errorList" class="small"></ul>
-      <p class="note">Rules: pick your name & email; answer A1 and B1; answer ≥3 in A and ≥3 in B; total between 7 and 12.</p>
+      <p class="note">Rules: select your name & valid email; answer A1 and B1; ≥3 in A and ≥3 in B; total between 7 and 12. “Double” is optional but must be one of your selections if chosen.</p>
     </section>
 
     <!-- Summary -->
@@ -187,13 +196,13 @@
           <span class="chip" id="limitNotice">Max allowed: 12</span>
         </div>
       </div>
-      <p class="note">Organizer email: <strong>wrathofmath85@gmail.com</strong>. Uses EmailJS for automatic email (with CC to participant).</p>
+      <p class="note">Organizer: <strong>wrathofmath85@gmail.com</strong> • EmailJS (single send, CC participant).</p>
     </div>
   </div>
 
   <script>
     /************ CONFIG ************/
-    // Name → Email directory (edit as needed)
+    // Name → Email mapping (edit)
     const NAME_EMAILS = {
       "Ben Abels": "babels1017@aol.com",
 "Brian Allardt": "ballardt@cbcregroup.com",
@@ -266,48 +275,138 @@
 "Zach Wood": "zwood20@gmail.com",
 "Keith Zalewski": "keith.r.zalewski@gmail.com"
 
+
     };
 
-    // Deadlines (ISO "YYYY-MM-DDTHH:mm"). Past = disabled.
+    // EmailJS credentials (from app.emailjs.com)
+    const EMAILJS_SERVICE_ID  = "service_txqdfck";
+    	   const EMAILJS_TEMPLATE_ID = "template_o8du7pt"; // this template sends to you and CCs the participant
+    	   const EMAILJS_PUBLIC_KEY  = "w4UC6ofDTC0VdRI44";
+
+    const ORGANIZER_EMAIL     = "wrathofmath85@gmail.com"; // optional to include in email body
+
+    // ===== Editable Questions =====
+    // Each question: { id, text, choices: [..labels..], deadline: "YYYY-MM-DDTHH:mm", mandatory: boolean }
+    // Tip: choices can be any strings (e.g., ["Team Red","Team Blue"]).
     const DEFAULT_DEADLINE_A = "2025-12-31T23:59";
     const DEFAULT_DEADLINE_B = "2025-12-31T23:59";
 
-    // EmailJS credentials (get these from app.emailjs.com)
-    const EMAILJS_SERVICE_ID  = "service_txqdfck";
-    const EMAILJS_TEMPLATE_ID = "template_o8du7pt"; // this template sends to you and CCs the participant
-    const EMAILJS_PUBLIC_KEY  = "w4UC6ofDTC0VdRI44";
+    const questionsA = [
+     { id:"A1", text:"Raiders @ Cardinals (-7) Saturday @ 10:00 PM - NFL+", choices:["Raiders","Cardinals (-7)"], deadline:"2025-08-23T22:0", mandatory:true },
+{ id:"A2", text:"Steelers (-3) @ Panthers Thursday @ 7:00 PM - NFL+", choices:["Steelers (-3)","Panthers"], deadline:"2025-08-21T19:0", mandatory:true },
+{ id:"A3", text:"Patriots @ Giants (-3.5) Thursday @ 8:00 PM - AMZN", choices:["Patriots","Giants (-3.5)"], deadline:"2025-08-21T20:0", mandatory:true },
+{ id:"A4", text:"Eagles @ Jets (-7) Friday @ 7:30 PM - 0", choices:["Eagles","Jets (-7)"], deadline:"2025-08-22T19:30", mandatory:true },
+{ id:"A5", text:"Vikings @ Titans (-2) Friday @ 8:00 PM - 0", choices:["Vikings","Titans (-2)"], deadline:"2025-08-22T20:0", mandatory:true },
+{ id:"A6", text:"Falcons (-1.5) @ Cowboys Friday @ 8:00 PM - NFL+", choices:["Falcons (-1.5)","Cowboys"], deadline:"2025-08-22T20:0", mandatory:true },
+{ id:"A7", text:"Bears @ Chiefs (-34) Friday @ 8:20 PM - 0", choices:["Bears","Chiefs (-34)"], deadline:"2025-08-22T20:20", mandatory:true },
+{ id:"A8", text:"Ravens @ Commanders (-7.5) Saturday @ 12:00 PM - 0", choices:["Ravens","Commanders (-7.5)"], deadline:"2025-08-23T12:0", mandatory:true },
+{ id:"A9", text:"Texans @ Lions (-2) Saturday @ 1:00 PM - 0", choices:["Texans","Lions (-2)"], deadline:"2025-08-23T13:0", mandatory:true },
+{ id:"A10", text:"Broncos (-5) @ Saints Saturday @ 1:00 PM - 0", choices:["Broncos (-5)","Saints"], deadline:"2025-08-23T13:0", mandatory:true },
+{ id:"A11", text:"Colts (-3) @ Bengals Saturday @ 1:00 PM - 0", choices:["Colts (-3)","Bengals"], deadline:"2025-08-23T13:0", mandatory:true },
+{ id:"A12", text:"Rams @ Browns (-6) Saturday @ 1:00 PM - NFL+", choices:["Rams","Browns (-6)"], deadline:"2025-08-23T13:0", mandatory:true },
+{ id:"A13", text:"Seahawks (-9) @ Packers Saturday @ 4:00 PM - NFL+", choices:["Seahawks (-9)","Packers"], deadline:"2025-08-23T16:0", mandatory:true },
+{ id:"A14", text:"Jaguars (-4) @ Dolphins Saturday @ 7:00 PM - NFL+", choices:["Jaguars (-4)","Dolphins"], deadline:"2025-08-23T19:0", mandatory:true },
+{ id:"A15", text:"Bills (-3.5) @ Buccaneers Saturday @ 7:30 PM - 0", choices:["Bills (-3.5)","Buccaneers"], deadline:"2025-08-23T19:30", mandatory:true },
+{ id:"A16", text:"Chargers (-4.5) @ 49ers Saturday @ 8:30 PM - 0", choices:["Chargers (-4.5)","49ers"], deadline:"2025-08-23T20:30", mandatory:true },
 
-    // Organizer email (for payload clarity; your template "To" is set in EmailJS)
-    const ORGANIZER_EMAIL = "wrathofmath85@gmail.com";
 
-    /************ DATA ************/
-    const questionsA = Array.from({ length: 16 }, (_, i) => ({
-      id: `A${i+1}`, text: `Question A${i+1}`, deadline: DEFAULT_DEADLINE_A, mandatory: i === 0
-    }));
-    const questionsB = Array.from({ length: 50 }, (_, i) => ({
-      id: `B${i+1}`, text: `Question B${i+1}`, deadline: DEFAULT_DEADLINE_B, mandatory: i === 0
-    }));
+    ];
+
+    const questionsB = [
+       { id:"B1", text:"#1 Texas @ #3 Ohio State (-2.5) Saturday @ 12:00 PM - FOX", choices:["#1 Texas","#3 Ohio State (-2.5)"], deadline:"2025-08-29T17:0", mandatory:true },
+{ id:"B2", text:"#22 Iowa St  @ #17 Kansas State (-3) Saturday @ 12:00 PM - ESPN", choices:["#22 Iowa St ","#17 Kansas State (-3)"], deadline:"2025-08-23T12:0", mandatory:false },
+{ id:"B3", text:"Fresno St  @ Kansas (-12) Saturday @ 6:30 PM - FOX", choices:["Fresno St ","Kansas (-12)"], deadline:"2025-08-23T18:30", mandatory:false },
+{ id:"B4", text:"Sam Houston @ W  Kentucky (-10) Saturday @ 7:00 PM - CBSSN", choices:["Sam Houston","W  Kentucky (-10)"], deadline:"2025-08-23T19:0", mandatory:false },
+{ id:"B5", text:"Stanford @ Hawaii (-2) Saturday @ 7:30 PM - 0", choices:["Stanford","Hawaii (-2)"], deadline:"2025-08-23T19:30", mandatory:false },
+{ id:"B6", text:"#25 Boise St  (-6.5) @ South Florida Thursday @ 5:30 PM - ESPN", choices:["#25 Boise St  (-6.5)","South Florida"], deadline:"2025-08-28T17:30", mandatory:false },
+{ id:"B7", text:"Ohio @ Rutgers (-14.5) Thursday @ 6:00 PM - BTN", choices:["Ohio","Rutgers (-14.5)"], deadline:"2025-08-28T18:0", mandatory:false },
+{ id:"B8", text:"East Carolina @ NC State (-12.5) Thursday @ 7:00 PM - ACCN", choices:["East Carolina","NC State (-12.5)"], deadline:"2025-08-28T19:0", mandatory:false },
+{ id:"B9", text:"Jacksonville St  @ UCF (-16.5) Thursday @ 7:00 PM - ESP+", choices:["Jacksonville St ","UCF (-16.5)"], deadline:"2025-08-28T19:0", mandatory:false },
+{ id:"B10", text:"Wyoming (-7.5) @ Akron Thursday @ 7:00 PM - ESP+", choices:["Wyoming (-7.5)","Akron"], deadline:"2025-08-28T19:0", mandatory:false },
+{ id:"B11", text:"UT Martin @ Oklahoma State (-22.5) Thursday @ 7:30 PM - ESP+", choices:["UT Martin","Oklahoma State (-22.5)"], deadline:"2025-08-28T19:30", mandatory:false },
+{ id:"B12", text:"Elon @ Duke (-33.5) Thursday @ 7:30 PM - ESP+", choices:["Elon","Duke (-33.5)"], deadline:"2025-08-28T19:30", mandatory:false },
+{ id:"B13", text:"S F  Austin @ Houston (-22.5) Thursday @ 8:00 PM - ESP+", choices:["S F  Austin","Houston (-22.5)"], deadline:"2025-08-28T20:0", mandatory:false },
+{ id:"B14", text:"Buffalo @ Minnesota (-15) Thursday @ 8:00 PM - FS1", choices:["Buffalo","Minnesota (-15)"], deadline:"2025-08-28T20:0", mandatory:false },
+{ id:"B15", text:"Nebraska (-6.5) @ Cincinnati Thursday @ 9:00 PM - ESPN", choices:["Nebraska (-6.5)","Cincinnati"], deadline:"2025-08-28T21:0", mandatory:false },
+{ id:"B16", text:"Miami-OH @ Wisconsin (-17.5) Thursday @ 9:00 PM - BTN", choices:["Miami-OH","Wisconsin (-17.5)"], deadline:"2025-08-28T21:0", mandatory:false },
+{ id:"B17", text:"Stony Brook @ San Diego St  (-16) Thursday @ 10:00 PM - 0", choices:["Stony Brook","San Diego St  (-16)"], deadline:"2025-08-28T22:0", mandatory:false },
+{ id:"B18", text:"Kennesaw St  @ Wake Forest (-17.5) Friday @ 7:00 PM - ACCN", choices:["Kennesaw St ","Wake Forest (-17.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B19", text:"App  St  (-7) @ Charlotte Friday @ 7:00 PM - ESPU", choices:["App  St  (-7)","Charlotte"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B20", text:"W  Michigan @ Michigan St  (-18.5) Friday @ 7:00 PM - FS1", choices:["W  Michigan","Michigan St  (-18.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B21", text:"W  Illinois @ #12 Illinois (-45.5) Friday @ 7:30 PM - PEAC", choices:["W  Illinois","#12 Illinois (-45.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B22", text:"Georgia Tech (-4) @ Colorado Friday @ 8:00 PM - ESPN", choices:["Georgia Tech (-4)","Colorado"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B23", text:"Auburn (-2.5) @ Baylor Friday @ 8:00 PM - FOX", choices:["Auburn (-2.5)","Baylor"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B24", text:"UNLV (-13) @ Sam Houston Friday @ 9:30 PM - CBSSN", choices:["UNLV (-13)","Sam Houston"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B25", text:"C  Michigan @ San Jose St  (-11) Friday @ 10:30 PM - FS1", choices:["C  Michigan","San Jose St  (-11)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B26", text:"FAU @ Maryland (-14) Saturday @ 12:00 PM - BTN", choices:["FAU","Maryland (-14)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B27", text:"Ball St  @ Purdue (-17.5) Saturday @ 12:00 PM - BTN", choices:["Ball St ","Purdue (-17.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B28", text:"Syracuse @ #24 Tennessee (-14) Saturday @ 12:00 PM - ABC", choices:["Syracuse","#24 Tennessee (-14)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B29", text:"Miss  State (-12) @ So  Miss Saturday @ 12:00 PM - ESPN", choices:["Miss  State (-12)","So  Miss"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B30", text:"Northwestern @ Tulane (-6) Saturday @ 12:00 PM - ESPU", choices:["Northwestern","Tulane (-6)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B31", text:"Toledo @ Kentucky (-8) Saturday @ 12:45 PM - SECN", choices:["Toledo","Kentucky (-8)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B32", text:"Old Dominion @ #20 Indiana (-22.5) Saturday @ 2:30 PM - FS1", choices:["Old Dominion","#20 Indiana (-22.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B33", text:"Temple (-3.5) @ UMass Saturday @ 3:30 PM - ESP+", choices:["Temple (-3.5)","UMass"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B34", text:"South Dakota @ #22 Iowa St  (-14.5) Saturday @ 3:30 PM - FOX", choices:["South Dakota","#22 Iowa St  (-14.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B35", text:"Nevada @ #2 Penn State (-44) Saturday @ 3:30 PM - 0", choices:["Nevada","#2 Penn State (-44)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B36", text:"Marshall @ #5 Georgia (-39.5) Saturday @ 3:30 PM - ESPN", choices:["Marshall","#5 Georgia (-39.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B37", text:"#8 Alabama (-13.5) @ Florida State Saturday @ 3:30 PM - ABC", choices:["#8 Alabama (-13.5)","Florida State"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B38", text:"Maine @ Liberty (-25.5) Saturday @ 4:00 PM - ESP+", choices:["Maine","Liberty (-25.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B39", text:"Montana St  @ #7 Oregon (-27.5) Saturday @ 4:00 PM - BTN", choices:["Montana St ","#7 Oregon (-27.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B40", text:"Weber St  @ James Madison (-25.5) Saturday @ 6:00 PM - ESP+", choices:["Weber St ","James Madison (-25.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B41", text:"Illinois St  @ #18 Oklahoma (-35.5) Saturday @ 6:00 PM - ESP+", choices:["Illinois St ","#18 Oklahoma (-35.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B42", text:"C  Carolina @ Virginia (-12.5) Saturday @ 6:00 PM - ACCN", choices:["C  Carolina","Virginia (-12.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B43", text:"Albany @ Iowa (-37.5) Saturday @ 6:00 PM - FS1", choices:["Albany","Iowa (-37.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B44", text:"Charleston So  @ Vanderbilt (-36) Saturday @ 7:00 PM - ESP+", choices:["Charleston So ","Vanderbilt (-36)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B45", text:"North Dakota @ #17 Kansas State (-28.5) Saturday @ 7:00 PM - ESP+", choices:["North Dakota","#17 Kansas State (-28.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B46", text:"Nicholls St  @ Troy (-22.5) Saturday @ 7:00 PM - ESP+", choices:["Nicholls St ","Troy (-22.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B47", text:"SE Missouri St  @ Arkansas St  (-10.5) Saturday @ 7:00 PM - ESP+", choices:["SE Missouri St ","Arkansas St  (-10.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B48", text:"UTSA @ #19 Texas A&M (-21.5) Saturday @ 7:00 PM - ESPN", choices:["UTSA","#19 Texas A&M (-21.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B49", text:"UTEP @ Utah St  (-3.5) Saturday @ 7:30 PM - CBSSN", choices:["UTEP","Utah St  (-3.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B50", text:"SE Louisiana @ Louisiana Tech (-13.5) Saturday @ 7:30 PM - ESP+", choices:["SE Louisiana","Louisiana Tech (-13.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B51", text:"New Mexico @ #14 Michigan (-37) Saturday @ 7:30 PM - NBC", choices:["New Mexico","#14 Michigan (-37)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B52", text:"Missouri St  @ USC (-35) Saturday @ 7:30 PM - BTN", choices:["Missouri St ","USC (-35)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B53", text:"#9 LSU @ #4 Clemson (-4) Saturday @ 7:30 PM - ABC", choices:["#9 LSU","#4 Clemson (-4)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B54", text:"Georgia St  @ #21 Ole Miss (-38.5) Saturday @ 7:45 PM - SECN", choices:["Georgia St ","#21 Ole Miss (-38.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B55", text:"E  Michigan @ Texas St  (-14) Saturday @ 8:00 PM - ESP+", choices:["E  Michigan","Texas St  (-14)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B56", text:"Portland St  @ BYU (-35) Saturday @ 8:00 PM - ESP+", choices:["Portland St ","BYU (-35)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B57", text:"Rice @ Louisiana (-13) Saturday @ 8:00 PM - ESP+", choices:["Rice","Louisiana (-13)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B58", text:"Bryant @ New Mexico St  (-19.5) Saturday @ 9:00 PM - ESP+", choices:["Bryant","New Mexico St  (-19.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B59", text:"Ga  Southern @ Fresno St  (-2) Saturday @ 9:30 PM - FS1", choices:["Ga  Southern","Fresno St  (-2)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B60", text:"N  Arizona @ #11 Arizona St  (-28.5) Saturday @ 10:00 PM - ESP+", choices:["N  Arizona","#11 Arizona St  (-28.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B61", text:"Idaho @ Washington St  (-9.5) Saturday @ 10:00 PM - CW", choices:["Idaho","Washington St  (-9.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B62", text:"Hawaii @ Arizona (-13.5) Saturday @ 10:30 PM - TNT", choices:["Hawaii","Arizona (-13.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B63", text:"California @ Oregon State (-3) Saturday @ 10:30 PM - ESPN", choices:["California","Oregon State (-3)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B64", text:"Utah (-6.5) @ UCLA Saturday @ 11:00 PM - FOX", choices:["Utah (-6.5)","UCLA"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B65", text:"Colorado St  @ Washington (-20) Saturday @ 11:00 PM - BTN", choices:["Colorado St ","Washington (-20)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B66", text:"Virginia Tech @ #13 South Carolina (-7.5) Sunday @ 3:00 PM - ESPN", choices:["Virginia Tech","#13 South Carolina (-7.5)"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B67", text:"#6 Notre Dame (-2.5) @ #10 Miami (Fla ) Sunday @ 7:30 PM - ABC", choices:["#6 Notre Dame (-2.5)","#10 Miami (Fla )"], deadline:"2025-08-29T17:0", mandatory:false },
+{ id:"B68", text:"TCU (-3.5) @ North Carolina Monday @ 8:00 PM - ESPN", choices:["TCU (-3.5)","North Carolina"], deadline:"2025-08-29T17:0", mandatory:false },
+
+    ];
 
     /************ RENDER ************/
     const listA = document.getElementById('listA');
     const listB = document.getElementById('listB');
+
     function renderSection(listEl, items) {
       items.forEach(q => {
         const row = document.createElement('div');
         row.className = 'row';
         row.dataset.deadline = q.deadline;
         row.dataset.qid = q.id;
-        row.dataset.section = q.id[0];
+        row.dataset.section = q.id[0]; // 'A' or 'B'
+
+        const answersHtml = q.choices.map((label,i)=>(
+          `<label><input type="radio" name="${q.id}" value="${escapeAttr(label)}" /> ${escapeHtml(label)}</label>`
+        )).join('');
+
         row.innerHTML = `
           <div>
-            <div class="label">${q.text}</div>
+            <div class="label">${escapeHtml(q.text)}</div>
             <div class="muted small">Deadline: <span class="deadline">${escapeHtml(q.deadline)}</span></div>
           </div>
           <div class="chip ${q.mandatory ? 'mandatory' : ''}">${q.mandatory ? 'Mandatory' : 'Optional'}</div>
-          <div class="answers">
-            <label><input type="radio" name="${q.id}" value="A" /> A</label>
-            <label><input type="radio" name="${q.id}" value="B" /> B</label>
-          </div>
+          <div class="answers">${answersHtml}</div>
           <div><button type="button" class="clear-btn" data-clear="${q.id}">Clear</button></div>
         `;
         listEl.appendChild(row);
@@ -317,10 +416,9 @@
     renderSection(listB, questionsB);
 
     /************ UTILS ************/
-    function escapeHtml(s) {
-      return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-    }
-    function isExpired(deadlineStr) {
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+    function escapeAttr(s){ return String(s).replace(/"/g,'&quot;'); }
+    function isExpired(deadlineStr){
       if (!deadlineStr) return false;
       const d = new Date(deadlineStr);
       if (isNaN(d)) return false;
@@ -328,11 +426,15 @@
     }
     function getAllRows(){ return Array.from(document.querySelectorAll('.row')); }
     function getCheckedAnswers(){
-      const map = new Map();
+      const map = new Map(); // qid -> { value, labelText, deadline }
       getAllRows().forEach(row => {
         const qid = row.dataset.qid;
         const checked = row.querySelector('input[type=radio]:checked');
-        if (checked) map.set(qid, checked.value);
+        if (checked){
+          const label = row.querySelector('.label')?.textContent || qid;
+          const deadline = row.dataset.deadline || '';
+          map.set(qid, { value: checked.value, labelText: label, deadline });
+        }
       });
       return map;
     }
@@ -385,6 +487,38 @@
         document.getElementById('limitNotice').textContent = `Max allowed: ${maxAllowed}`;
       }
     }
+
+    // ---- Double support ----
+    const doubleSelect = document.getElementById('doubleSelect');
+    function refreshDoubleChoices(){
+      const answers = getCheckedAnswers();
+      const prev = doubleSelect.value;
+      doubleSelect.innerHTML = `<option value="">— No double —</option>`;
+      // populate with selected (non-expired) questions
+      const ids = Array.from(answers.keys()).sort((a,b)=>{
+        if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
+        return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
+      });
+      ids.forEach(id=>{
+        const a = answers.get(id);
+        const opt = document.createElement('option');
+        opt.value = id;
+        opt.textContent = `${id} — ${a.labelText}`;
+        doubleSelect.appendChild(opt);
+      });
+      // preserve previous selection if still valid
+      if (prev && answers.has(prev)){ doubleSelect.value = prev; }
+      else if (prev){ doubleSelect.value = ""; } // invalidated
+    }
+
+    function getDoubleSelection(){
+      const qid = doubleSelect.value;
+      if (!qid) return null;
+      const answers = getCheckedAnswers();
+      if (!answers.has(qid)) return null; // must be among current selections
+      return { qid, label: answers.get(qid).labelText, value: answers.get(qid).value };
+    }
+
     function updateSummary(){
       const container = document.getElementById('summary');
       const answers = getCheckedAnswers();
@@ -393,9 +527,9 @@
         return;
       }
       const chosenA=[], chosenB=[];
-      for (const [qid,val] of answers.entries()){
-        const label = document.querySelector(`.row[data-qid="${qid}"] .label`)?.textContent || qid;
-        (qid.startsWith('A')?chosenA:chosenB).push({qid,label,val});
+      for (const [qid,obj] of answers.entries()){
+        const bucket = qid.startsWith('A') ? chosenA : chosenB;
+        bucket.push({ qid, label: obj.labelText, val: obj.value });
       }
       chosenA.sort((x,y)=> x.qid.localeCompare(y.qid));
       chosenB.sort((x,y)=> x.qid.localeCompare(y.qid));
@@ -403,28 +537,11 @@
         <h3>${title}</h3>
         ${arr.length ? `<ol class="summary-list">${arr.map(x=>`<li><strong>${escapeHtml(x.label)}:</strong> ${escapeHtml(x.val)}</li>`).join('')}</ol>` : `<p class="muted small">None selected.</p>`}
       `;
-      container.innerHTML = renderList('Section A', chosenA) + renderList('Section B', chosenB);
+      const dbl = getDoubleSelection();
+      const dblHtml = dbl ? `<p class="chip" style="margin-top:10px;">Double: <strong>${escapeHtml(dbl.qid)} — ${escapeHtml(dbl.label)}</strong> (${escapeHtml(dbl.value)})</p>` : '';
+      container.innerHTML = renderList('Section A', chosenA) + renderList('Section B', chosenB) + dblHtml;
     }
-    function buildEmailBody(name, email, answersMap){
-      const keys = Array.from(answersMap.keys()).sort((a,b)=>{
-        if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
-        return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
-      });
-      const lines = [];
-      lines.push(`Name: ${name}`);
-      lines.push(`Email: ${email}`);
-      lines.push(`Timestamp: ${new Date().toString()}`);
-      lines.push('');
-      lines.push('Selections:');
-      keys.forEach(k=>{
-        const row = document.querySelector(`.row[data-qid="${k}"]`);
-        const label = row?.querySelector('.label')?.textContent || k;
-        const v = answersMap.get(k);
-        const deadline = row?.dataset.deadline || '';
-        lines.push(`- ${label}: ${v} (deadline ${deadline})`);
-      });
-      return lines.join('\n');
-    }
+
     function validateAll(){
       const errors = [];
       const name = document.getElementById('name').value.trim();
@@ -447,17 +564,55 @@
         if (total > 12){ checklist.push(`❌ Total too high (${total}/12)`); errors.push('Answer no more than 12 questions overall.'); }
       }
 
+      // Double (optional): if selected, must be among chosen
+      const dbl = getDoubleSelection();
+      if (dbl){
+        if (answers.has(dbl.qid)) checklist.push(`✅ Double is valid: ${dbl.qid}`);
+        else { checklist.push('❌ Double pick is not among your selections'); errors.push('Your double must be one of your selected answers.'); }
+      } else {
+        checklist.push('ℹ️ No double selected (optional)');
+      }
+
       const ul = document.getElementById('errorList');
       ul.innerHTML = '';
       checklist.forEach(msg=>{
         const li = document.createElement('li');
         li.textContent = msg;
-        li.className = msg.startsWith('✅') ? 'ok' : 'bad';
+        li.className = msg.startsWith('✅') ? 'ok' : (msg.startsWith('❌') ? 'bad' : '');
         ul.appendChild(li);
       });
 
-      return { valid: errors.length===0, name, email, answers, emailText: buildEmailBody(name, email, answers) };
+      return {
+        valid: errors.length===0,
+        name, email, answers,
+        doublePick: dbl,
+        emailText: buildEmailBody(name, email, answers, dbl)
+      };
     }
+
+    function buildEmailBody(name, email, answersMap, dbl){
+      const keys = Array.from(answersMap.keys()).sort((a,b)=>{
+        if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
+        return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
+      });
+      const lines = [];
+      lines.push(`Name: ${name}`);
+      lines.push(`Email: ${email}`);
+      lines.push(`Timestamp: ${new Date().toString()}`);
+      if (dbl){ lines.push(`Double: ${dbl.qid} — ${dbl.label} (${dbl.value})`); }
+      lines.push('');
+      lines.push('Selections:');
+      keys.forEach(k=>{
+        const row = document.querySelector(`.row[data-qid="${k}"]`);
+        const label = row?.querySelector('.label')?.textContent || k;
+        const v = answersMap.get(k).value;
+        const deadline = answersMap.get(k).deadline || '';
+        const isDouble = (dbl && dbl.qid === k) ? ' [DOUBLE]' : '';
+        lines.push(`- ${label}: ${v}${isDouble} (deadline ${deadline})`);
+      });
+      return lines.join('\n');
+    }
+
     function clearQuestion(qid){
       document.querySelectorAll(`input[name="${qid}"]`).forEach(r => r.checked=false);
       onChange();
@@ -465,6 +620,7 @@
     function resetAll(){
       document.getElementById('name').value = '';
       document.getElementById('email').value = '';
+      document.getElementById('doubleSelect').value = '';
       document.querySelectorAll('input[type=radio]').forEach(r => r.checked=false);
       onChange();
       window.scrollTo({ top:0, behavior:'smooth' });
@@ -472,8 +628,14 @@
 
     /************ EVENTS ************/
     function onChange(){
-      refreshExpiry(); updateCounts(); enforceMaxSelections(12); updateSummary(); validateAll();
+      refreshExpiry();
+      updateCounts();
+      enforceMaxSelections(12);
+      refreshDoubleChoices();
+      updateSummary();
+      validateAll();
     }
+
     document.addEventListener('change', e=>{
       if (e.target.matches('#name')){
         const n = e.target.value.trim();
@@ -481,32 +643,33 @@
         const mapped = NAME_EMAILS[n];
         if (mapped){ emailInput.value = mapped; }
       }
-      if (e.target.matches('#name, #email, input[type=radio]')) onChange();
+      if (e.target.matches('#name, #email, input[type=radio], #doubleSelect')) onChange();
     });
+
     document.addEventListener('click', e=>{
       if (e.target.matches('[data-clear]')){ clearQuestion(e.target.getAttribute('data-clear')); }
     });
+
     document.getElementById('resetBtn').addEventListener('click', resetAll);
 
     // EmailJS init
     document.addEventListener('DOMContentLoaded', () => {
-      if (EMAILJS_PUBLIC_KEY && emailjs) {
+      if (EMAILJS_PUBLIC_KEY && window.emailjs) {
         emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
       }
-      // initial draws
-      refreshExpiry(); updateCounts(); enforceMaxSelections(12); updateSummary(); validateAll();
+      refreshExpiry(); updateCounts(); enforceMaxSelections(12); refreshDoubleChoices(); updateSummary(); validateAll();
     });
 
-    // Submit = single email (to organizer, CC participant via EmailJS template settings)
+    // Submit (single email to organizer, CC participant via template)
     document.getElementById('submitBtn').addEventListener('click', async (e)=>{
       e.preventDefault();
       const { valid, name, email, emailText } = validateAll();
       if (!valid){ alert('Please fix the items in “Checks & Errors” before submitting.'); return; }
 
       const params = {
-        organizer_email: ORGANIZER_EMAIL, // optional var you can reference in template body
+        organizer_email: ORGANIZER_EMAIL, // optional var for your template body
         participant_name: name,
-        participant_email: email,         // used by EmailJS template in the CC field
+        participant_email: email,         // used by EmailJS template in CC field
         selections_text: emailText
       };
 
@@ -519,8 +682,8 @@
       }
     });
 
-    // periodic expiry refresh (if page stays open)
-    setInterval(()=>{ refreshExpiry(); updateCounts(); enforceMaxSelections(12); updateSummary(); validateAll(); }, 60000);
+    // periodic expiry refresh
+    setInterval(()=>{ refreshExpiry(); updateCounts(); enforceMaxSelections(12); refreshDoubleChoices(); updateSummary(); validateAll(); }, 60000);
   </script>
 </body>
 </html>
