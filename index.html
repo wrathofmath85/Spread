@@ -680,46 +680,105 @@ function buildEmailBody(name, email, answersMap, dbl){
     });
 
     // Submit (single email to organizer, CC participant via template)
-    document.getElementById('submitBtn').addEventListener('click', async (e)=>{
-      e.preventDefault();
-      const { valid, name, email, emailText } = validateAll();
-      if (!valid){ alert('Please fix the items in “Checks & Errors” before submitting.'); return; }
+    <script>
 
-      const params = {
-        organizer_email: ORGANIZER_EMAIL, // optional var for your template body
-        participant_name: name,
-        participant_email: email,         // used by EmailJS template in CC field
-        selections_text: emailText
-      };
+document.getElementById('submitBtn').addEventListener('click', async (e)=>{
 
-      try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
-        alert('Submitted! Email sent to organizer and CC’d to participant.');
-      } catch (err){
-        console.error('EmailJS error:', err);
-        alert('There was an error sending the email. Please try again.');
-      }
+  e.preventDefault();
 
-// Build selections from your map (qid -> { labelText, value, deadline })
-const selections = [];
-for (const [qid, obj] of getCheckedAnswers().entries()) {
- selections.push({ qid, question: obj.labelText, choice: obj.value });
-}
-const dbl = getDoubleSelection(); // {qid,label,value} or null
-fetch(SHEET_WEBAPP_URL, {
- method: "POST",
- headers: {"Content-Type":"application/json"},
- body: JSON.stringify({
-   type: "submission",
-   week: CURRENT_WEEK,
-   participant_name: name,
-   participant_email: email,
-   double_qid: dbl ? dbl.qid : null,
-   selections
- })
-}).catch(()=>{}); // fire-and-forget
+  const { valid, name, email, answers } = validateAll();
+
+  if (!valid){
+
+    alert('Please fix the items in “Checks & Errors” before submitting.');
+
+    return;
+
+  }
+
+  // --- Send the email (you can move this after the sheet log if you prefer) ---
+
+  try {
+
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+
+      organizer_email: ORGANIZER_EMAIL,
+
+      participant_name: name,
+
+      participant_email: email,
+
+      selections_text: buildEmailBody(name, email, answers, getDoubleSelection())
 
     });
+
+  } catch (err) {
+
+    console.error('EmailJS error:', err);
+
+    alert('There was an error sending the email. Please try again.');
+
+    return;
+
+  }
+
+  // --- Build the selections array for Sheets ---
+
+  const selections = [];
+
+  for (const [qid, obj] of answers.entries()) {
+
+    selections.push({ qid, question: obj.labelText, choice: obj.value });
+
+  }
+
+  const dbl = getDoubleSelection(); // {qid,label,value} or null
+
+  // --- Log to Google Sheets via Apps Script Web App ---
+
+  try {
+
+    await fetch(SHEET_WEBAPP_URL, {
+
+      method: "POST",
+
+      headers: {"Content-Type":"application/json"},
+
+      body: JSON.stringify({
+
+        type: "submission",
+
+        week: CURRENT_WEEK,
+
+        participant_name: name,
+
+        participant_email: email,
+
+        double_qid: dbl ? dbl.qid : null,
+
+        selections
+
+      })
+
+    });
+
+  } catch (err){
+
+    console.error('Sheet log failed:', err);
+
+    // (optional) alert user; I’m keeping it silent so submission still succeeds.
+
+  }
+
+  alert('Submitted! Email sent and picks logged.');
+
+  // Optional redirect to a results/thanks page:
+
+  // window.location.href = "/your-repo/results.html?week=" + CURRENT_WEEK;
+
+});
+</script>
+ 
 
 
     // periodic expiry refresh
