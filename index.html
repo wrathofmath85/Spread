@@ -298,6 +298,8 @@
     // Each question: { id, text, choices: [..labels..], deadline: "YYYY-MM-DDTHH:mm", mandatory: boolean }
     const DEFAULT_DEADLINE_A = "2025-12-31T23:59";
     const DEFAULT_DEADLINE_B = "2025-12-31T23:59";
+	const CURRENT_WEEK = 1; // change each week (1..13)
+	const SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz8GjfObkT36UxvmM8V7fWv8N084TFxMr9iuseEb8aaqRx4BLtzrRY6SZtu_o2QFKi8/exec"; // your /exec URL
 
     const questionsA = [
       { id:"A1", text:"Raiders @ Cardinals (-7) Saturday @ 10:00 PM - NFL+", choices:["Raiders","Cardinals (-7)"], deadline:"2025-08-23T22:0", mandatory:true },
@@ -697,6 +699,25 @@
         alert('There was an error sending the email. Please try again.');
       }
     });
+
+// Build selections from your map (qid -> { labelText, value, deadline })
+const selections = [];
+for (const [qid, obj] of getCheckedAnswers().entries()) {
+ selections.push({ qid, question: obj.labelText, choice: obj.value });
+}
+const dbl = getDoubleSelection(); // {qid,label,value} or null
+fetch(SHEET_WEBAPP_URL, {
+ method: "POST",
+ headers: {"Content-Type":"application/json"},
+ body: JSON.stringify({
+   type: "submission",
+   week: CURRENT_WEEK,
+   participant_name: name,
+   participant_email: email,
+   double_qid: dbl ? dbl.qid : null,
+   selections
+ })
+}).catch(()=>{}); // fire-and-forget
 
     // periodic expiry refresh
     setInterval(()=>{ refreshExpiry(); updateCounts(); enforceMaxSelections(12); refreshDoubleChoices(); updateSummary(); validateAll(); }, 60000);
