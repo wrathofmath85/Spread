@@ -609,27 +609,28 @@
       };
     }
 
-    function buildEmailBody(name, email, answersMap, dbl){
-      const keys = Array.from(answersMap.keys()).sort((a,b)=>{
-        if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
-        return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
-      });
-      const lines = [];
-      lines.push(`Name: ${name}`);
-      lines.push(`Email: ${email}`);
-      lines.push(`Timestamp: ${new Date().toString()}`);
-      if (dbl){ lines.push(`Double: ${dbl.qid} — ${dbl.label} (${dbl.value})`); }
-      lines.push('');
-      lines.push('Selections:');
-      keys.forEach(k=>{
-        const row = document.querySelector(`.row[data-qid="${k}"]`);
-        const label = row?.querySelector('.label')?.textContent || k;
-        const v = answersMap.get(k).value;
-        const isDouble = (dbl && dbl.qid === k) ? ' [DOUBLE]' : '';
-        lines.push(`- ${label}: ${v}${isDouble} (deadline ${deadline})`);
-      });
-      return lines.join('\n');
-    }
+function buildEmailBody(name, email, answersMap, dbl){
+ const keys = Array.from(answersMap.keys()).sort((a,b)=>{
+   if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
+   return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
+ });
+ const lines = [];
+ lines.push(`Name: ${name}`);
+ lines.push(`Email: ${email}`);
+ lines.push(`Timestamp: ${new Date().toString()}`);
+ if (dbl){ lines.push(`Double: ${dbl.qid} — ${dbl.label} (${dbl.value})`); }
+ lines.push('');
+ lines.push('Selections:');
+ keys.forEach(k=>{
+   const row = document.querySelector(`.row[data-qid="${k}"]`);
+   const label = row?.querySelector('.label')?.textContent || k;
+   const v = answersMap.get(k).value;
+   const dl = answersMap.get(k).deadline || '';
+   const isDouble = (dbl && dbl.qid === k) ? ' [DOUBLE]' : '';
+   lines.push(`- ${label}: ${v}${isDouble}${dl ? ` (deadline ${dl})` : ''}`);
+ });
+ return lines.join('\n');
+}
 
     function clearQuestion(qid){
       document.querySelectorAll(`input[name="${qid}"]`).forEach(r => r.checked=false);
