@@ -700,24 +700,6 @@
       }
     });
 
-// Build selections from your map (qid -> { labelText, value, deadline })
-const selections = [];
-for (const [qid, obj] of getCheckedAnswers().entries()) {
- selections.push({ qid, question: obj.labelText, choice: obj.value });
-}
-const dbl = getDoubleSelection(); // {qid,label,value} or null
-fetch(SHEET_WEBAPP_URL, {
- method: "POST",
- headers: {"Content-Type":"application/json"},
- body: JSON.stringify({
-   type: "submission",
-   week: CURRENT_WEEK,
-   participant_name: name,
-   participant_email: email,
-   double_qid: dbl ? dbl.qid : null,
-   selections
- })
-}).catch(()=>{}); // fire-and-forget
 
     // periodic expiry refresh
     setInterval(()=>{ refreshExpiry(); updateCounts(); enforceMaxSelections(12); refreshDoubleChoices(); updateSummary(); validateAll(); }, 60000);
