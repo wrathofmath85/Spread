@@ -55,7 +55,7 @@
   </style>
 
   <!-- EmailJS (client-side email) -->
-  <script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40emailjs%2Fbrowser%404%2Fdist%2Femail.min.js&data=05%7C02%7Cdan.fox%40brighthousefinancial.com%7C6a33412b08cb414148fb08dddd8bc602%7C2658e698ac384347a56f3f96a6bfa8ff%7C0%7C0%7C638910314604709006%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=7gmWT4wSjhZzhuIoli8NO3Pk8AM4HqEIfDN3cFiS%2Ftk%3D&reserved=0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
   <div class="wrap">
@@ -298,8 +298,8 @@
     // Each question: { id, text, choices: [..labels..], deadline: "YYYY-MM-DDTHH:mm", mandatory: boolean }
     const DEFAULT_DEADLINE_A = "2025-12-31T23:59";
     const DEFAULT_DEADLINE_B = "2025-12-31T23:59";
-	const CURRENT_WEEK = 1; // change each week (1..13)
-	const SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz8GjfObkT36UxvmM8V7fWv8N084TFxMr9iuseEb8aaqRx4BLtzrRY6SZtu_o2QFKi8/exec"; // your /exec URL
+    const CURRENT_WEEK = 1; // change each week (1..13)
+    const SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz8GjfObkT36UxvmM8V7fWv8N084TFxMr9iuseEb8aaqRx4BLtzrRY6SZtu_o2QFKi8/exec"; // your /exec URL
 
     const questionsA = [
       { id:"A1", text:"Raiders @ Cardinals (-7) Saturday @ 10:00 PM - NFL+", choices:["Raiders","Cardinals (-7)"], deadline:"2025-08-23T22:0", mandatory:true },
