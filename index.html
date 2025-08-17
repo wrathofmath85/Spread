@@ -699,7 +699,6 @@ function buildEmailBody(name, email, answersMap, dbl){
         console.error('EmailJS error:', err);
         alert('There was an error sending the email. Please try again.');
       }
-    });
 
 // Build selections from your map (qid -> { labelText, value, deadline })
 const selections = [];
@@ -719,6 +718,9 @@ fetch(SHEET_WEBAPP_URL, {
    selections
  })
 }).catch(()=>{}); // fire-and-forget
+
+    });
+
 
     // periodic expiry refresh
     setInterval(()=>{ refreshExpiry(); updateCounts(); enforceMaxSelections(12); refreshDoubleChoices(); updateSummary(); validateAll(); }, 60000);
