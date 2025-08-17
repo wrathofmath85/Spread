@@ -156,7 +156,7 @@
     <div class="grid-2">
       <section class="card" id="sectionA">
         <div class="hdr">
-          <h2>Section A <span class="soft">(16 items; A1 mandatory by default)</span></h2>
+          <h2>NFL Games <span class="soft">(First game is required to be picked)</span></h2>
           <div class="counts"><span class="chip" id="countA">Answered: 0 / 16</span></div>
         </div>
         <div id="listA"></div>
@@ -164,7 +164,7 @@
 
       <section class="card" id="sectionB">
         <div class="hdr">
-          <h2>Section B <span class="soft">(50 items; B1 mandatory by default)</span></h2>
+          <h2>College Games <span class="soft">(First game is required to be picked)</span></h2>
           <div class="counts"><span class="chip" id="countB">Answered: 0 / 50</span></div>
         </div>
         <div id="listB"></div>
@@ -185,7 +185,7 @@
     <section class="card errors" id="errors">
       <h2>Checks & Errors</h2>
       <ul id="errorList" class="small"></ul>
-      <p class="note">Rules: select your name & valid email; answer A1 and B1; ≥3 in A and ≥3 in B; total between 7 and 12. “Double” is optional but must be one of your selections if chosen.</p>
+      <p class="note">Rules: select your name & valid email; Pick required NFL and College game; ≥3 NFL games picked and ≥3 College games picked; total games picked between 7 and 12. “Double” is optional but must be one of your selections if chosen.</p>
     </section>
 
     <!-- Summary -->
@@ -540,7 +540,7 @@
       `;
       const dbl = getDoubleSelection();
       const dblHtml = dbl ? `<p class="chip" style="margin-top:10px;">Double: <strong>${escapeHtml(dbl.qid)} — ${escapeHtml(dbl.label)}</strong> (${escapeHtml(dbl.value)})</p>` : '';
-      container.innerHTML = renderList('Section A', chosenA) + renderList('Section B', chosenB) + dblHtml;
+      container.innerHTML = renderList('NFL Games', chosenA) + renderList('College Games', chosenB) + dblHtml;
     }
 
     // Footer status box
@@ -548,7 +548,7 @@
       const box = document.getElementById('statusBox');
       if (!box) return;
       if (valid){
-        box.textContent = 'BEAR DOWN';
+        box.textContent = 'BEAR DOWN!';
         box.classList.remove('bad'); box.classList.add('good');
       } else {
         box.textContent = 'ERRORS DETECTED';
