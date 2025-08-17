@@ -44,6 +44,12 @@
     .hdr{ display:flex; flex-wrap:wrap; gap:8px; align-items:baseline; justify-content:space-between; }
     .two-col { display:grid; gap:12px; grid-template-columns: 1fr; }
     @media (min-width: 640px){ .two-col{ grid-template-columns:1fr 1fr; } }
+	.status{
+ 		display:inline-block; padding:10px 14px; border-radius:12px; font-weight:800;
+ 		letter-spacing:.5px; border:1px solid var(--border);
+		}
+	.status.bad{ background:#7f1d1d; color:#fff; }        /* red box */
+	.status.good{ background:#1e3a8a; color:orange; }     /* blue box w/ orange text */
   </style>
   <!-- EmailJS (client-side email) -->
   <script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40emailjs%2Fbrowser%404%2Fdist%2Femail.min.js&data=05%7C02%7Cdan.fox%40brighthousefinancial.com%7Cd18f21b77f5742b1f1c708dddd19cdd7%7C2658e698ac384347a56f3f96a6bfa8ff%7C0%7C0%7C638909825094513578%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=b6LYnDIlYdAvEUV0gJ4a9JSofJ8TCLPAg0wN5OyLUP4%3D&reserved=0"></script>
@@ -146,7 +152,7 @@
     <div class="grid-2">
       <section class="card" id="sectionA">
         <div class="hdr">
-          <h2>NFL <span class="soft">(16 items; A1 mandatory by default)</span></h2>
+          <h2>NFL <span class="soft">(First Game Mandatory)</span></h2>
           <div class="counts"><span class="chip" id="countA">Answered: 0 / 16</span></div>
         </div>
         <div id="listA"></div>
@@ -154,7 +160,7 @@
 
       <section class="card" id="sectionB">
         <div class="hdr">
-          <h2>NCAA <span class="soft">(50 items; B1 mandatory by default)</span></h2>
+          <h2>NCAA <span class="soft">(First Game Mandatory)</span></h2>
           <div class="counts"><span class="chip" id="countB">Answered: 0 / 50</span></div>
         </div>
         <div id="listB"></div>
@@ -192,9 +198,8 @@
           <button id="resetBtn" class="clear-btn">Reset All</button>
         </div>
         <div>
-          <span class="chip" id="totalCount">Total answered: 0</span>
-          <span class="chip" id="limitNotice">Max allowed: 12</span>
-        </div>
+		<span id="statusBox" class="status bad" role="status" aria-live="polite">ERRORS DETECTED</span>
+	</div>
       </div>
       <p class="note">Organizer: <strong>wrathofmath85@gmail.com</strong> • EmailJS (single send, CC participant).</p>
     </div>
@@ -540,7 +545,7 @@
       `;
       const dbl = getDoubleSelection();
       const dblHtml = dbl ? `<p class="chip" style="margin-top:10px;">Double: <strong>${escapeHtml(dbl.qid)} — ${escapeHtml(dbl.label)}</strong> (${escapeHtml(dbl.value)})</p>` : '';
-      container.innerHTML = renderList('Section A', chosenA) + renderList('Section B', chosenB) + dblHtml;
+      container.innerHTML = renderList('NFL Selected', chosenA) + renderList('NCAA Selected', chosenB) + dblHtml;
     }
 
     function validateAll(){
@@ -555,14 +560,14 @@
 
       if (name) checklist.push('✅ Name selected'); else { checklist.push('❌ Name not selected'); errors.push('Please choose your name.'); }
       if (email && /\S+@\S+\.\S+/.test(email)) checklist.push('✅ Valid email provided'); else { checklist.push('❌ Email missing/invalid'); errors.push('Enter a valid email.'); }
-      if (A1) checklist.push('✅ Section A, Q1 answered'); else { checklist.push('❌ Section A, Q1 not answered'); errors.push('Answer Section A question 1.'); }
-      if (B1) checklist.push('✅ Section B, Q1 answered'); else { checklist.push('❌ Section B, Q1 not answered'); errors.push('Answer Section B question 1.'); }
-      if (a >= 3) checklist.push('✅ ≥3 answers in Section A'); else { checklist.push(`❌ Only ${a} in Section A`); errors.push('Answer at least 3 questions in Section A.'); }
-      if (b >= 3) checklist.push('✅ ≥3 answers in Section B'); else { checklist.push(`❌ Only ${b} in Section B`); errors.push('Answer at least 3 questions in Section B.'); }
+      if (A1) checklist.push('✅ Mandatory NFL game picked'); else { checklist.push('❌ Mandatory NFL game not picked'); errors.push('Select Mandatory NFL game'); }
+      if (B1) checklist.push('✅ Mandatory NCAA game picked'); else { checklist.push('❌ Mandatory NCAA game not picked'); errors.push('Select Mandatory NCAA game'); }
+      if (a >= 3) checklist.push('✅ ≥3 answers in NFL'); else { checklist.push(`❌ Only ${a} in NFL`); errors.push('Pick at least 3 NFL games'); }
+      if (b >= 3) checklist.push('✅ ≥3 answers in NCAA'); else { checklist.push(`❌ Only ${b} in NCAA`); errors.push('Pick at least 3 NCAA games'); }
       if (total >= 7 && total <= 12) checklist.push(`✅ Total between 7 and 12 (now ${total})`);
       else {
-        if (total < 7) { checklist.push(`❌ Total too low (${total}/7)`); errors.push('Answer at least 7 questions overall.'); }
-        if (total > 12){ checklist.push(`❌ Total too high (${total}/12)`); errors.push('Answer no more than 12 questions overall.'); }
+        if (total < 7) { checklist.push(`❌ Total too low (${total}/7)`); errors.push('Pick at least 7 games total'); }
+        if (total > 12){ checklist.push(`❌ Total too high (${total}/12)`); errors.push('You have picked more than 12 games'); }
       }
 
       // Double (optional): if selected, must be among chosen
@@ -582,6 +587,10 @@
         li.className = msg.startsWith('✅') ? 'ok' : (msg.startsWith('❌') ? 'bad' : '');
         ul.appendChild(li);
       });
+
+	const isValid = errors.length===0;
+		// update footer status
+	setStatus(isValid);
 
       return {
         valid: errors.length===0,
@@ -626,6 +635,18 @@
       onChange();
       window.scrollTo({ top:0, behavior:'smooth' });
     }
+
+    function setStatus(valid){
+ 		const box = document.getElementById('statusBox');
+ 		if (!box) return;
+ 		if (valid){
+   			box.textContent = 'BEAR DOWN';
+   			box.classList.remove('bad'); box.classList.add('good');
+ 		} else {
+   			box.textContent = 'ERRORS DETECTED';
+   			box.classList.remove('good'); box.classList.add('bad');
+ 		}
+          }
 
     /************ EVENTS ************/
     function onChange(){
