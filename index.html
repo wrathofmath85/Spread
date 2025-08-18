@@ -735,32 +735,33 @@ document.getElementById('submitBtn').addEventListener('click', async (e)=>{
   const dbl = getDoubleSelection(); // {qid,label,value} or null
 
   // --- Log to Google Sheets via Apps Script Web App ---
-
-  try {
-
-    await fetch(SHEET_WEBAPP_URL, {
-
-      method: "POST",
-
-      headers: {"Content-Type":"application/json"},
-
-      body: JSON.stringify({
-
-        type: "submission",
-
-        week: CURRENT_WEEK,
-
-        participant_name: name,
-
-        participant_email: email,
-
-        double_qid: dbl ? dbl.qid : null,
-
-        selections
-
-      })
-
-    });
+try {
+ const resp = await fetch(SHEET_WEBAPP_URL, {
+   method: "POST",
+   headers: {"Content-Type":"application/json"},
+   body: JSON.stringify({
+     type: "submission",
+     week: CURRENT_WEEK,
+     participant_name: name,
+     participant_email: email,
+     double_qid: dbl ? dbl.qid : null,
+     selections
+   })
+ });
+ const text = await resp.text();            // read body once
+ let data;
+ try { data = JSON.parse(text); } catch { data = null; }
+ console.log("Sheets POST status:", resp.status, text);
+ if (!resp.ok || !data || data.ok !== true) {
+   alert("Google Sheets logging failed.\n\nHTTP " + resp.status + "\n" + text +
+         "\n\nCheck your Apps Script deployment access & URL.");
+   return; // stop here so you know it failed
+ }
+} catch (err){
+ console.error('Sheet log failed:', err);
+ alert('Could not reach the Google Sheets Web App. See console for details.');
+ return;
+}
 
   } catch (err){
 
