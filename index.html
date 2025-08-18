@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,18 +45,11 @@
     .hdr{ display:flex; flex-wrap:wrap; gap:8px; align-items:baseline; justify-content:space-between; }
     .two-col { display:grid; gap:12px; grid-template-columns: 1fr; }
     @media (min-width: 640px){ .two-col{ grid-template-columns:1fr 1fr; } }
-
-    /* STATUS BOX (your request) */
-    .status{
-      display:inline-block; padding:10px 14px; border-radius:12px; font-weight:800;
-      letter-spacing:.5px; border:1px solid var(--border);
-    }
-    .status.bad{ background:#7f1d1d; color:#fff; }        /* red box */
-    .status.good{ background:#1e3a8a; color:orange; }     /* blue box w/ orange text */
+    .status{ display:inline-block; padding:10px 14px; border-radius:12px; font-weight:800; letter-spacing:.5px; border:1px solid var(--border); }
+    .status.bad{ background:#7f1d1d; color:#fff; }
+    .status.good{ background:#1e3a8a; color:orange; }
   </style>
-
-<!-- EmailJS (client-side email) -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40emailjs%2Fbrowser%404%2Fdist%2Femail.min.js&data=05%7C02%7Cdan.fox%40brighthousefinancial.com%7Cf575e45fae0a495af86b08ddde8607c8%7C2658e698ac384347a56f3f96a6bfa8ff%7C0%7C0%7C638911389445016012%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=I9wtLA9s63ZCkbH%2FE45UAWsdmb%2FTdFL0A%2BKjYtkfC%2BY%3D&reserved=0"></script>
 </head>
 <body>
   <div class="wrap">
@@ -69,79 +63,31 @@
           <label for="name" class="small muted">Choose your name</label>
           <select id="name" class="name-select" aria-label="Choose your name">
             <option value="">— Select your name —</option>
-            <!-- Edit these names -->
-             <option>Ben Abels</option>
-<option>Brian Allardt</option>
-<option>TexChris Anderson</option>
-<option>Ray Ball</option>
-<option>Lowell Bittinger</option>
-<option>Dennis Blair</option>
-<option>Tom Cange</option>
-<option>Head Cheese</option>
-<option>Joe Choma</option>
-<option>Doug Cooper</option>
-<option>Hayden Cooper</option>
-<option>Ryan Cox</option>
-<option>Justin Cure</option>
-<option>Mark Dalesandro</option>
-<option>Brian Dillow</option>
-<option>Kent Dinius</option>
-<option>Jeff Drlik</option>
-<option>Noah Drlik</option>
-<option>Scott Drlik</option>
-<option>Brady Drlik</option>
-<option>Tim Elkin</option>
-<option>Nick Erickson</option>
-<option>Nathan Faciane</option>
-<option>Connor Flavin</option>
-<option>Dan Fox</option>
-<option>Brad Gray</option>
-<option>Jeff Hobbs</option>
-<option>Laura Hobbs</option>
-<option>Chris Jerrell</option>
-<option>Jason Johns</option>
-<option>Rich Kearns</option>
-<option>Dustin Kelso</option>
-<option>Sam Knoop</option>
-<option>Brett Kramer</option>
-<option>Foxy Lady</option>
-<option>Rick Lambert</option>
-<option>Byron Lin</option>
-<option>Lance Lorah</option>
-<option>Dave Mallory</option>
-<option>Steve McAnnally</option>
-<option>Nolan McCarthy</option>
-<option>Jamie McDermott</option>
-<option>Brad Meadows</option>
-<option>Phil Michael</option>
-<option>Matt Mitcham</option>
-<option>Jason Murray</option>
-<option>Alex Nelson</option>
-<option>Chase Perry</option>
-<option>Chris Rexroat</option>
-<option>Michael Rodine</option>
-<option>Tom Roman</option>
-<option>Dave Ross</option>
-<option>Rowdy Rudd</option>
-<option>Brandon Rychener</option>
-<option>Brian Scherrer</option>
-<option>Eric Scherrer</option>
-<option>Joel Scherrer</option>
-<option>Reed Scherrer</option>
-<option>Josh Shirey</option>
-<option>Mark Sirovica</option>
-<option>Bob Swisher</option>
-<option>Bill Thomas</option>
-<option>Miguel Torres</option>
-<option>Terry Toth</option>
-<option>Blake Vanderbush</option>
-<option>Matt Verbit</option>
-<option>Blake Walker</option>
-<option>Chad Whitaker</option>
-<option>Zach Wood</option>
-<option>Keith Zalewski</option>
-
-
+            <!-- (names list preserved from your file) -->
+            <option>Ben Abels</option><option>Brian Allardt</option><option>TexChris Anderson</option>
+            <option>Ray Ball</option><option>Lowell Bittinger</option><option>Dennis Blair</option>
+            <option>Tom Cange</option><option>Head Cheese</option><option>Joe Choma</option>
+            <option>Doug Cooper</option><option>Hayden Cooper</option><option>Ryan Cox</option>
+            <option>Justin Cure</option><option>Mark Dalesandro</option><option>Brian Dillow</option>
+            <option>Kent Dinius</option><option>Jeff Drlik</option><option>Noah Drlik</option>
+            <option>Scott Drlik</option><option>Brady Drlik</option><option>Tim Elkin</option>
+            <option>Nick Erickson</option><option>Nathan Faciane</option><option>Connor Flavin</option>
+            <option>Dan Fox</option><option>Brad Gray</option><option>Jeff Hobbs</option>
+            <option>Laura Hobbs</option><option>Chris Jerrell</option><option>Jason Johns</option>
+            <option>Rich Kearns</option><option>Dustin Kelso</option><option>Sam Knoop</option>
+            <option>Brett Kramer</option><option>Foxy Lady</option><option>Rick Lambert</option>
+            <option>Byron Lin</option><option>Lance Lorah</option><option>Dave Mallory</option>
+            <option>Steve McAnnally</option><option>Nolan McCarthy</option><option>Jamie McDermott</option>
+            <option>Brad Meadows</option><option>Phil Michael</option><option>Matt Mitcham</option>
+            <option>Jason Murray</option><option>Alex Nelson</option><option>Chase Perry</option>
+            <option>Chris Rexroat</option><option>Michael Rodine</option><option>Tom Roman</option>
+            <option>Dave Ross</option><option>Rowdy Rudd</option><option>Brandon Rychener</option>
+            <option>Brian Scherrer</option><option>Eric Scherrer</option><option>Joel Scherrer</option>
+            <option>Reed Scherrer</option><option>Josh Shirey</option><option>Mark Sirovica</option>
+            <option>Bob Swisher</option><option>Bill Thomas</option><option>Miguel Torres</option>
+            <option>Terry Toth</option><option>Blake Vanderbush</option><option>Matt Verbit</option>
+            <option>Blake Walker</option><option>Chad Whitaker</option><option>Zach Wood</option>
+            <option>Keith Zalewski</option>
           </select>
         </div>
         <div>
@@ -152,7 +98,7 @@
       <p class="note small">One email is sent to the organizer and you’ll be CC’d.</p>
     </section>
 
-    <!-- Sections A & B -->
+    <!-- Sections -->
     <div class="grid-2">
       <section class="card" id="sectionA">
         <div class="hdr">
@@ -161,7 +107,6 @@
         </div>
         <div id="listA"></div>
       </section>
-
       <section class="card" id="sectionB">
         <div class="hdr">
           <h2>College Games <span class="soft">(First game is required to be picked)</span></h2>
@@ -194,562 +139,348 @@
       <div id="summary"><p class="muted small">Your selections will appear here.</p></div>
     </section>
 
-    <!-- Footer actions -->
+    <!-- Footer -->
     <div class="sticky-footer">
       <div class="hdr" style="align-items:center;">
         <div class="actions">
           <button id="submitBtn" class="btn">Submit</button>
           <button id="resetBtn" class="clear-btn">Reset All</button>
         </div>
-        <div>
-          <!-- Status box replaces the two chips -->
-          <span id="statusBox" class="status bad" role="status" aria-live="polite">ERRORS DETECTED</span>
-        </div>
+        <div><span id="statusBox" class="status bad" role="status" aria-live="polite">ERRORS DETECTED</span></div>
       </div>
       <p class="note">Organizer: <strong>wrathofmath85@gmail.com</strong> • EmailJS (single send, CC participant).</p>
     </div>
   </div>
 
   <script>
-    /************ CONFIG ************/
-    // Name → Email mapping (edit)
-    const NAME_EMAILS = {
-      "Ben Abels": "babels1017@aol.com",
-"Brian Allardt": "ballardt@cbcregroup.com",
-"TexChris Anderson": "christopher.a.anderson@hotmail.com",
-"Ray Ball": "captray60@gmail.com",
-"Lowell Bittinger": "lowell.bittinger@mail.com",
-"Dennis Blair": "denblair01@aol.com",
-"Tom Cange": "iu_sucks@msn.com",
-"Head Cheese": "phil.michael88@yahoo.com",
-"Joe Choma": "joechoma53@gmail.com",
-"Doug Cooper": "xboiler@hotmail.com",
-"Hayden Cooper": "haydendc99@gmail.com",
-"Ryan Cox": "mrcox10@hotmail.com",
-"Justin Cure": "jcure@hertz.com",
-"Mark Dalesandro": "Mjodalesandro@gmail.com   ",
-"Brian Dillow": "brian.dillow@cnoinc.com",
-"Kent Dinius": "kent.dinius@cnoinc.com",
-"Jeff Drlik": "jnjdrlik@hotmail.com",
-"Noah Drlik": "ndrlik11@gmail.com",
-"Scott Drlik": "SCOTT.DRLIK@CNOinc.com",
-"Brady Drlik": "bdrlik16@gmail.com",
-"Tim Elkin": "tcelkin@sbcglobal.net",
-"Nick Erickson": "njericks@gmail.com",
-"Nathan Faciane": "nathan.faciane@brighthousefinancial.com",
-"Connor Flavin": "connor.flavin@cnoinc.com",
-"Dan Fox": "wrathofmath85@gmail.com",
-"Brad Gray": "blgray317@gmail.com",
-"Jeff Hobbs": "jeffrey.k.hobbs@gmail.com",
-"Laura Hobbs": "lemoyles@gmail.com",
-"Chris Jerrell": "CHRIS.JERRELL@CNOinc.com",
-"Jason Johns": "jason.c.johns@me.com",
-"Rich Kearns": "rkearns229@gmail.com",
-"Dustin Kelso": "DUSTIN.KELSO@CNOinc.com",
-"Sam Knoop": "sam.knoop@aiinnovations.com",
-"Brett Kramer": "br_kramer@yahoo.com",
-"Foxy Lady": "wrathofmath85@gmail.com",
-"Rick Lambert": "ricklambert24@gmail.com",
-"Byron Lin": "Byron.Lin@CNOinc.com",
-"Lance Lorah": "lance.lorah@gmail.com",
-"Dave Mallory": "mallory503@gmail.com",
-"Steve McAnnally": "smcannally@gmail.com",
-"Nolan McCarthy": "ngmccarthy@gmail.com",
-"Jamie McDermott": "Jamie.McDermott@RaymondJames.com",
-"Brad Meadows": "Bradley.Meadows@CNOinc.com",
-"Phil Michael": "phil.michael@cnoinc.com",
-"Matt Mitcham": "MATTHEW.MITCHAM@CNOinc.com",
-"Jason Murray": "jmurray1290@gmail.com",
-"Alex Nelson": "alexander.nelson@CNOinc.com",
-"Chase Perry": "Clperry23@gmail.com",
-"Chris Rexroat": "chris.rexroat@yahoo.com",
-"Michael Rodine": "mrodine@gmail.com",
-"Tom Roman": "tom.roman55@outlook.com",
-"Dave Ross": "ncadaveross@gmail.com",
-"Rowdy Rudd": "rowdy.rudd@gmail.com",
-"Brandon Rychener": "b_rychener@yahoo.com",
-"Brian Scherrer": "scherrerbe@gmail.com",
-"Eric Scherrer": "erscherrer@comcast.net",
-"Joel Scherrer": "JMscherrer@comcast.net",
-"Reed Scherrer": "Reed.Scherrer@animalhealthinternational.com",
-"Josh Shirey": "joshcshirey@gmail.com",
-"Mark Sirovica": "msirovica@gmail.com",
-"Bob Swisher": "robert.m.swisher@gmail.com",
-"Bill Thomas": "Bill.Thomas@homedefenders.com",
-"Miguel Torres": "miguel.torres@cnoinc.com",
-"Terry Toth": "terrytoth12@yahoo.com",
-"Blake Vanderbush": "blakevanderbush@gmail.com",
-"Matt Verbit": "M.verbit@yahoo.com",
-"Blake Walker": "Blake.Walker@CNOinc.com",
-"Chad Whitaker": "chadawhitaker@gmail.com",
-"Zach Wood": "zwood20@gmail.com",
-"Keith Zalewski": "keith.r.zalewski@gmail.com"
+/************ CONFIG ************/
+// Name → Email mapping (same as your file) const NAME_EMAILS = {
+  "Ben Abels":"babels1017@aol.com","Brian Allardt":"ballardt@cbcregroup.com","TexChris Anderson":"christopher.a.anderson@hotmail.com",
+  "Ray Ball":"captray60@gmail.com","Lowell Bittinger":"lowell.bittinger@mail.com","Dennis Blair":"denblair01@aol.com",
+  "Tom Cange":"iu_sucks@msn.com","Head Cheese":"phil.michael88@yahoo.com","Joe Choma":"joechoma53@gmail.com",
+  "Doug Cooper":"xboiler@hotmail.com","Hayden Cooper":"haydendc99@gmail.com","Ryan Cox":"mrcox10@hotmail.com",
+  "Justin Cure":"jcure@hertz.com","Mark Dalesandro":"Mjodalesandro@gmail.com","Brian Dillow":"brian.dillow@cnoinc.com",
+  "Kent Dinius":"kent.dinius@cnoinc.com","Jeff Drlik":"jnjdrlik@hotmail.com","Noah Drlik":"ndrlik11@gmail.com",
+  "Scott Drlik":"SCOTT.DRLIK@CNOinc.com","Brady Drlik":"bdrlik16@gmail.com","Tim Elkin":"tcelkin@sbcglobal.net",
+  "Nick Erickson":"njericks@gmail.com","Nathan Faciane":"nathan.faciane@brighthousefinancial.com","Connor Flavin":"connor.flavin@cnoinc.com",
+  "Dan Fox":"wrathofmath85@gmail.com","Brad Gray":"blgray317@gmail.com","Jeff Hobbs":"jeffrey.k.hobbs@gmail.com",
+  "Laura Hobbs":"lemoyles@gmail.com","Chris Jerrell":"CHRIS.JERRELL@CNOinc.com","Jason Johns":"jason.c.johns@me.com",
+  "Rich Kearns":"rkearns229@gmail.com","Dustin Kelso":"DUSTIN.KELSO@CNOinc.com","Sam Knoop":"sam.knoop@aiinnovations.com",
+  "Brett Kramer":"br_kramer@yahoo.com","Foxy Lady":"wrathofmath85@gmail.com","Rick Lambert":"ricklambert24@gmail.com",
+  "Byron Lin":"Byron.Lin@CNOinc.com","Lance Lorah":"lance.lorah@gmail.com","Dave Mallory":"mallory503@gmail.com",
+  "Steve McAnnally":"smcannally@gmail.com","Nolan McCarthy":"ngmccarthy@gmail.com","Jamie McDermott":"Jamie.McDermott@RaymondJames.com",
+  "Brad Meadows":"Bradley.Meadows@CNOinc.com","Phil Michael":"phil.michael@cnoinc.com","Matt Mitcham":"MATTHEW.MITCHAM@CNOinc.com",
+  "Jason Murray":"jmurray1290@gmail.com","Alex Nelson":"alexander.nelson@CNOinc.com","Chase Perry":"Clperry23@gmail.com",
+  "Chris Rexroat":"chris.rexroat@yahoo.com","Michael Rodine":"mrodine@gmail.com","Tom Roman":"tom.roman55@outlook.com",
+  "Dave Ross":"ncadaveross@gmail.com","Rowdy Rudd":"rowdy.rudd@gmail.com","Brandon Rychener":"b_rychener@yahoo.com",
+  "Brian Scherrer":"scherrerbe@gmail.com","Eric Scherrer":"erscherrer@comcast.net","Joel Scherrer":"JMscherrer@comcast.net",
+  "Reed Scherrer":"Reed.Scherrer@animalhealthinternational.com","Josh Shirey":"joshcshirey@gmail.com","Mark Sirovica":"msirovica@gmail.com",
+  "Bob Swisher":"robert.m.swisher@gmail.com","Bill Thomas":"Bill.Thomas@homedefenders.com","Miguel Torres":"miguel.torres@cnoinc.com",
+  "Terry Toth":"terrytoth12@yahoo.com","Blake Vanderbush":"blakevanderbush@gmail.com","Matt Verbit":"M.verbit@yahoo.com",
+  "Blake Walker":"Blake.Walker@CNOinc.com","Chad Whitaker":"chadawhitaker@gmail.com","Zach Wood":"zwood20@gmail.com",
+  "Keith Zalewski":"keith.r.zalewski@gmail.com"
+};
 
+// EmailJS (single send; your template CCs the participant) const EMAILJS_SERVICE_ID  = "service_txqdfck"; const EMAILJS_TEMPLATE_ID = "template_o8du7pt"; const EMAILJS_PUBLIC_KEY  = "w4UC6ofDTC0VdRI44";
+const ORGANIZER_EMAIL     = "wrathofmath85@gmail.com";
 
-    };
+// Week & questions (kept from your file; trimmed here for brevity) const CURRENT_WEEK = 1; // change weekly
 
-    // EmailJS credentials (from app.emailjs.com)
-    const EMAILJS_SERVICE_ID  = "service_txqdfck";
-    	   const EMAILJS_TEMPLATE_ID = "template_o8du7pt"; // this template sends to you and CCs the participant
-    	   const EMAILJS_PUBLIC_KEY  = "w4UC6ofDTC0VdRI44";
-    const ORGANIZER_EMAIL     = "wrathofmath85@gmail.com"; // optional to include in email body
+// Example question arrays (A1..A16, B1..B68) — using your data structure:
+const questionsA = [
+  { id:"A1", text:"Raiders @ Cardinals (-7) Saturday @ 10:00 PM - NFL+", choices:["Raiders","Cardinals (-7)"], deadline:"2025-08-23T22:00", mandatory:true },
+  { id:"A2", text:"Steelers (-3) @ Panthers Thursday @ 7:00 PM - NFL+", choices:["Steelers (-3)","Panthers"], deadline:"2025-08-21T19:00", mandatory:false },
+  /* ... keep the rest of your A3..A16 entries ... */ ]; const questionsB = [
+  { id:"B1", text:"#1 Texas @ #3 Ohio State (-2.5) Saturday @ 12:00 PM - FOX", choices:["#1 Texas","#3 Ohio State (-2.5)"], deadline:"2025-08-29T17:00", mandatory:true },
+  /* ... keep the rest of your B2..B68 entries ... */ ];
 
-    // ===== Editable Questions =====
-    // Each question: { id, text, choices: [..labels..], deadline: "YYYY-MM-DDTHH:mm", mandatory: boolean }
-    const DEFAULT_DEADLINE_A = "2025-12-31T23:59";
-    const DEFAULT_DEADLINE_B = "2025-12-31T23:59";
-    const CURRENT_WEEK = 1; // change each week (1..13)
-    const SHEET_WEBAPP_URL = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLj46zj-N6IyxNrGg33iFEkcGekzLu7bvDjx5hEakK22dhaH54Yu4DV95shPijsJrxzkB93BToUKMsCeXZ9-0Dvdcaoo-0UUWZUQxpWvH32tWtNKRPeEzCWuR1OaDAFOA9VPo2gHhp6kLPUw3EP2TR391aHvFfF1iPCQ_gONmvW5Tah_Dh1_9gT215LJchmXdIOcdJUT-dJuXiKPjtgZW9uh_pcxk9-QJ-A19xN1nYK2FkcNZbLu-MUPw0glFQDlmBwUwU5bRhnxIBMHbhua-0t_yHZYHg&lib=M-6njM1ActlpSFRYluh_hdDKUQMgyDvg9"; // your /exec URL
+/************ RENDER ************/
+const listA = document.getElementById('listA'); const listB = document.getElementById('listB');
 
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); } function escapeAttr(s){ return String(s).replace(/"/g,'&quot;'); }
 
-    const questionsA = [
-      { id:"A1", text:"Raiders @ Cardinals (-7) Saturday @ 10:00 PM - NFL+", choices:["Raiders","Cardinals (-7)"], deadline:"2025-08-23T22:0", mandatory:true },
-{ id:"A2", text:"Steelers (-3) @ Panthers Thursday @ 7:00 PM - NFL+", choices:["Steelers (-3)","Panthers"], deadline:"2025-08-21T19:0", mandatory:false },
-{ id:"A3", text:"Patriots @ Giants (-3.5) Thursday @ 8:00 PM - AMZN", choices:["Patriots","Giants (-3.5)"], deadline:"2025-08-21T20:0", mandatory:false },
-{ id:"A4", text:"Eagles @ Jets (-7) Friday @ 7:30 PM - 0", choices:["Eagles","Jets (-7)"], deadline:"2025-08-22T19:30", mandatory:false },
-{ id:"A5", text:"Vikings @ Titans (-2) Friday @ 8:00 PM - 0", choices:["Vikings","Titans (-2)"], deadline:"2025-08-22T20:0", mandatory:false },
-{ id:"A6", text:"Falcons (-1.5) @ Cowboys Friday @ 8:00 PM - NFL+", choices:["Falcons (-1.5)","Cowboys"], deadline:"2025-08-22T20:0", mandatory:false },
-{ id:"A7", text:"Bears @ Chiefs (-34) Friday @ 8:20 PM - 0", choices:["Bears","Chiefs (-34)"], deadline:"2025-08-22T20:20", mandatory:false },
-{ id:"A8", text:"Ravens @ Commanders (-7.5) Saturday @ 12:00 PM - 0", choices:["Ravens","Commanders (-7.5)"], deadline:"2025-08-23T12:0", mandatory:false },
-{ id:"A9", text:"Texans @ Lions (-2) Saturday @ 1:00 PM - 0", choices:["Texans","Lions (-2)"], deadline:"2025-08-23T13:0", mandatory:false },
-{ id:"A10", text:"Broncos (-5) @ Saints Saturday @ 1:00 PM - 0", choices:["Broncos (-5)","Saints"], deadline:"2025-08-23T13:0", mandatory:false },
-{ id:"A11", text:"Colts (-3) @ Bengals Saturday @ 1:00 PM - 0", choices:["Colts (-3)","Bengals"], deadline:"2025-08-23T13:0", mandatory:false },
-{ id:"A12", text:"Rams @ Browns (-6) Saturday @ 1:00 PM - NFL+", choices:["Rams","Browns (-6)"], deadline:"2025-08-23T13:0", mandatory:false },
-{ id:"A13", text:"Seahawks (-9) @ Packers Saturday @ 4:00 PM - NFL+", choices:["Seahawks (-9)","Packers"], deadline:"2025-08-23T16:0", mandatory:false },
-{ id:"A14", text:"Jaguars (-4) @ Dolphins Saturday @ 7:00 PM - NFL+", choices:["Jaguars (-4)","Dolphins"], deadline:"2025-08-23T19:0", mandatory:false },
-{ id:"A15", text:"Bills (-3.5) @ Buccaneers Saturday @ 7:30 PM - 0", choices:["Bills (-3.5)","Buccaneers"], deadline:"2025-08-23T19:30", mandatory:false },
-{ id:"A16", text:"Chargers (-4.5) @ 49ers Saturday @ 8:30 PM - 0", choices:["Chargers (-4.5)","49ers"], deadline:"2025-08-23T20:30", mandatory:false },
+function renderSection(listEl, items) {
+  items.forEach(q => {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.dataset.deadline = q.deadline;
+    row.dataset.qid = q.id;
 
-    ];
+    const answersHtml = q.choices.map((label)=>(`<label><input type="radio" name="${q.id}" value="${escapeAttr(label)}" /> ${escapeHtml(label)}</label>`)).join('');
 
-    const questionsB = [
-       { id:"B1", text:"#1 Texas @ #3 Ohio State (-2.5) Saturday @ 12:00 PM - FOX", choices:["#1 Texas","#3 Ohio State (-2.5)"], deadline:"2025-08-29T17:0", mandatory:true },
-{ id:"B2", text:"#22 Iowa St  @ #17 Kansas State (-3) Saturday @ 12:00 PM - ESPN", choices:["#22 Iowa St ","#17 Kansas State (-3)"], deadline:"2025-08-23T12:0", mandatory:false },
-{ id:"B3", text:"Fresno St  @ Kansas (-12) Saturday @ 6:30 PM - FOX", choices:["Fresno St ","Kansas (-12)"], deadline:"2025-08-23T18:30", mandatory:false },
-{ id:"B4", text:"Sam Houston @ W  Kentucky (-10) Saturday @ 7:00 PM - CBSSN", choices:["Sam Houston","W  Kentucky (-10)"], deadline:"2025-08-23T19:0", mandatory:false },
-{ id:"B5", text:"Stanford @ Hawaii (-2) Saturday @ 7:30 PM - 0", choices:["Stanford","Hawaii (-2)"], deadline:"2025-08-23T19:30", mandatory:false },
-{ id:"B6", text:"#25 Boise St  (-6.5) @ South Florida Thursday @ 5:30 PM - ESPN", choices:["#25 Boise St  (-6.5)","South Florida"], deadline:"2025-08-28T17:30", mandatory:false },
-{ id:"B7", text:"Ohio @ Rutgers (-14.5) Thursday @ 6:00 PM - BTN", choices:["Ohio","Rutgers (-14.5)"], deadline:"2025-08-28T18:0", mandatory:false },
-{ id:"B8", text:"East Carolina @ NC State (-12.5) Thursday @ 7:00 PM - ACCN", choices:["East Carolina","NC State (-12.5)"], deadline:"2025-08-28T19:0", mandatory:false },
-{ id:"B9", text:"Jacksonville St  @ UCF (-16.5) Thursday @ 7:00 PM - ESP+", choices:["Jacksonville St ","UCF (-16.5)"], deadline:"2025-08-28T19:0", mandatory:false },
-{ id:"B10", text:"Wyoming (-7.5) @ Akron Thursday @ 7:00 PM - ESP+", choices:["Wyoming (-7.5)","Akron"], deadline:"2025-08-28T19:0", mandatory:false },
-{ id:"B11", text:"UT Martin @ Oklahoma State (-22.5) Thursday @ 7:30 PM - ESP+", choices:["UT Martin","Oklahoma State (-22.5)"], deadline:"2025-08-28T19:30", mandatory:false },
-{ id:"B12", text:"Elon @ Duke (-33.5) Thursday @ 7:30 PM - ESP+", choices:["Elon","Duke (-33.5)"], deadline:"2025-08-28T19:30", mandatory:false },
-{ id:"B13", text:"S F  Austin @ Houston (-22.5) Thursday @ 8:00 PM - ESP+", choices:["S F  Austin","Houston (-22.5)"], deadline:"2025-08-28T20:0", mandatory:false },
-{ id:"B14", text:"Buffalo @ Minnesota (-15) Thursday @ 8:00 PM - FS1", choices:["Buffalo","Minnesota (-15)"], deadline:"2025-08-28T20:0", mandatory:false },
-{ id:"B15", text:"Nebraska (-6.5) @ Cincinnati Thursday @ 9:00 PM - ESPN", choices:["Nebraska (-6.5)","Cincinnati"], deadline:"2025-08-28T21:0", mandatory:false },
-{ id:"B16", text:"Miami-OH @ Wisconsin (-17.5) Thursday @ 9:00 PM - BTN", choices:["Miami-OH","Wisconsin (-17.5)"], deadline:"2025-08-28T21:0", mandatory:false },
-{ id:"B17", text:"Stony Brook @ San Diego St  (-16) Thursday @ 10:00 PM - 0", choices:["Stony Brook","San Diego St  (-16)"], deadline:"2025-08-28T22:0", mandatory:false },
-{ id:"B18", text:"Kennesaw St  @ Wake Forest (-17.5) Friday @ 7:00 PM - ACCN", choices:["Kennesaw St ","Wake Forest (-17.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B19", text:"App  St  (-7) @ Charlotte Friday @ 7:00 PM - ESPU", choices:["App  St  (-7)","Charlotte"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B20", text:"W  Michigan @ Michigan St  (-18.5) Friday @ 7:00 PM - FS1", choices:["W  Michigan","Michigan St  (-18.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B21", text:"W  Illinois @ #12 Illinois (-45.5) Friday @ 7:30 PM - PEAC", choices:["W  Illinois","#12 Illinois (-45.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B22", text:"Georgia Tech (-4) @ Colorado Friday @ 8:00 PM - ESPN", choices:["Georgia Tech (-4)","Colorado"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B23", text:"Auburn (-2.5) @ Baylor Friday @ 8:00 PM - FOX", choices:["Auburn (-2.5)","Baylor"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B24", text:"UNLV (-13) @ Sam Houston Friday @ 9:30 PM - CBSSN", choices:["UNLV (-13)","Sam Houston"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B25", text:"C  Michigan @ San Jose St  (-11) Friday @ 10:30 PM - FS1", choices:["C  Michigan","San Jose St  (-11)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B26", text:"FAU @ Maryland (-14) Saturday @ 12:00 PM - BTN", choices:["FAU","Maryland (-14)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B27", text:"Ball St  @ Purdue (-17.5) Saturday @ 12:00 PM - BTN", choices:["Ball St ","Purdue (-17.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B28", text:"Syracuse @ #24 Tennessee (-14) Saturday @ 12:00 PM - ABC", choices:["Syracuse","#24 Tennessee (-14)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B29", text:"Miss  State (-12) @ So  Miss Saturday @ 12:00 PM - ESPN", choices:["Miss  State (-12)","So  Miss"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B30", text:"Northwestern @ Tulane (-6) Saturday @ 12:00 PM - ESPU", choices:["Northwestern","Tulane (-6)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B31", text:"Toledo @ Kentucky (-8) Saturday @ 12:45 PM - SECN", choices:["Toledo","Kentucky (-8)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B32", text:"Old Dominion @ #20 Indiana (-22.5) Saturday @ 2:30 PM - FS1", choices:["Old Dominion","#20 Indiana (-22.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B33", text:"Temple (-3.5) @ UMass Saturday @ 3:30 PM - ESP+", choices:["Temple (-3.5)","UMass"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B34", text:"South Dakota @ #22 Iowa St  (-14.5) Saturday @ 3:30 PM - FOX", choices:["South Dakota","#22 Iowa St  (-14.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B35", text:"Nevada @ #2 Penn State (-44) Saturday @ 3:30 PM - 0", choices:["Nevada","#2 Penn State (-44)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B36", text:"Marshall @ #5 Georgia (-39.5) Saturday @ 3:30 PM - ESPN", choices:["Marshall","#5 Georgia (-39.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B37", text:"#8 Alabama (-13.5) @ Florida State Saturday @ 3:30 PM - ABC", choices:["#8 Alabama (-13.5)","Florida State"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B38", text:"Maine @ Liberty (-25.5) Saturday @ 4:00 PM - ESP+", choices:["Maine","Liberty (-25.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B39", text:"Montana St  @ #7 Oregon (-27.5) Saturday @ 4:00 PM - BTN", choices:["Montana St ","#7 Oregon (-27.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B40", text:"Weber St  @ James Madison (-25.5) Saturday @ 6:00 PM - ESP+", choices:["Weber St ","James Madison (-25.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B41", text:"Illinois St  @ #18 Oklahoma (-35.5) Saturday @ 6:00 PM - ESP+", choices:["Illinois St ","#18 Oklahoma (-35.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B42", text:"C  Carolina @ Virginia (-12.5) Saturday @ 6:00 PM - ACCN", choices:["C  Carolina","Virginia (-12.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B43", text:"Albany @ Iowa (-37.5) Saturday @ 6:00 PM - FS1", choices:["Albany","Iowa (-37.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B44", text:"Charleston So  @ Vanderbilt (-36) Saturday @ 7:00 PM - ESP+", choices:["Charleston So ","Vanderbilt (-36)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B45", text:"North Dakota @ #17 Kansas State (-28.5) Saturday @ 7:00 PM - ESP+", choices:["North Dakota","#17 Kansas State (-28.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B46", text:"Nicholls St  @ Troy (-22.5) Saturday @ 7:00 PM - ESP+", choices:["Nicholls St ","Troy (-22.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B47", text:"SE Missouri St  @ Arkansas St  (-10.5) Saturday @ 7:00 PM - ESP+", choices:["SE Missouri St ","Arkansas St  (-10.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B48", text:"UTSA @ #19 Texas A&M (-21.5) Saturday @ 7:00 PM - ESPN", choices:["UTSA","#19 Texas A&M (-21.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B49", text:"UTEP @ Utah St  (-3.5) Saturday @ 7:30 PM - CBSSN", choices:["UTEP","Utah St  (-3.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B50", text:"SE Louisiana @ Louisiana Tech (-13.5) Saturday @ 7:30 PM - ESP+", choices:["SE Louisiana","Louisiana Tech (-13.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B51", text:"New Mexico @ #14 Michigan (-37) Saturday @ 7:30 PM - NBC", choices:["New Mexico","#14 Michigan (-37)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B52", text:"Missouri St  @ USC (-35) Saturday @ 7:30 PM - BTN", choices:["Missouri St ","USC (-35)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B53", text:"#9 LSU @ #4 Clemson (-4) Saturday @ 7:30 PM - ABC", choices:["#9 LSU","#4 Clemson (-4)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B54", text:"Georgia St  @ #21 Ole Miss (-38.5) Saturday @ 7:45 PM - SECN", choices:["Georgia St ","#21 Ole Miss (-38.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B55", text:"E  Michigan @ Texas St  (-14) Saturday @ 8:00 PM - ESP+", choices:["E  Michigan","Texas St  (-14)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B56", text:"Portland St  @ BYU (-35) Saturday @ 8:00 PM - ESP+", choices:["Portland St ","BYU (-35)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B57", text:"Rice @ Louisiana (-13) Saturday @ 8:00 PM - ESP+", choices:["Rice","Louisiana (-13)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B58", text:"Bryant @ New Mexico St  (-19.5) Saturday @ 9:00 PM - ESP+", choices:["Bryant","New Mexico St  (-19.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B59", text:"Ga  Southern @ Fresno St  (-2) Saturday @ 9:30 PM - FS1", choices:["Ga  Southern","Fresno St  (-2)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B60", text:"N  Arizona @ #11 Arizona St  (-28.5) Saturday @ 10:00 PM - ESP+", choices:["N  Arizona","#11 Arizona St  (-28.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B61", text:"Idaho @ Washington St  (-9.5) Saturday @ 10:00 PM - CW", choices:["Idaho","Washington St  (-9.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B62", text:"Hawaii @ Arizona (-13.5) Saturday @ 10:30 PM - TNT", choices:["Hawaii","Arizona (-13.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B63", text:"California @ Oregon State (-3) Saturday @ 10:30 PM - ESPN", choices:["California","Oregon State (-3)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B64", text:"Utah (-6.5) @ UCLA Saturday @ 11:00 PM - FOX", choices:["Utah (-6.5)","UCLA"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B65", text:"Colorado St  @ Washington (-20) Saturday @ 11:00 PM - BTN", choices:["Colorado St ","Washington (-20)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B66", text:"Virginia Tech @ #13 South Carolina (-7.5) Sunday @ 3:00 PM - ESPN", choices:["Virginia Tech","#13 South Carolina (-7.5)"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B67", text:"#6 Notre Dame (-2.5) @ #10 Miami (Fla ) Sunday @ 7:30 PM - ABC", choices:["#6 Notre Dame (-2.5)","#10 Miami (Fla )"], deadline:"2025-08-29T17:0", mandatory:false },
-{ id:"B68", text:"TCU (-3.5) @ North Carolina Monday @ 8:00 PM - ESPN", choices:["TCU (-3.5)","North Carolina"], deadline:"2025-08-29T17:0", mandatory:false },
+    row.innerHTML = `
+      <div>
+        <div class="label">${escapeHtml(q.text)}</div>
+        <div class="muted small">Deadline: <span class="deadline">${escapeHtml(q.deadline)}</span></div>
+      </div>
+      <div class="chip ${q.mandatory ? 'mandatory' : ''}">${q.mandatory ? 'Mandatory' : 'Optional'}</div>
+      <div class="answers">${answersHtml}</div>
+      <div><button type="button" class="clear-btn" data-clear="${q.id}">Clear</button></div>
+    `;
+    listEl.appendChild(row);
+  });
+}
+renderSection(listA, questionsA);
+renderSection(listB, questionsB);
 
-    ];
+/************ UTILS ************/
+function isExpired(deadlineStr){
+  if (!deadlineStr) return false;
+  const d = new Date(deadlineStr);
+  if (isNaN(d)) return false;
+  return new Date() > d;
+}
+function getAllRows(){ return Array.from(document.querySelectorAll('.row')); }
 
-    /************ RENDER ************/
-    const listA = document.getElementById('listA');
-    const listB = document.getElementById('listB');
-
-    function renderSection(listEl, items) {
-      items.forEach(q => {
-        const row = document.createElement('div');
-        row.className = 'row';
-        row.dataset.deadline = q.deadline;
-        row.dataset.qid = q.id;
-        row.dataset.section = q.id[0]; // 'A' or 'B'
-
-        const answersHtml = q.choices.map((label)=>(
-          `<label><input type="radio" name="${q.id}" value="${escapeAttr(label)}" /> ${escapeHtml(label)}</label>`
-        )).join('');
-
-        row.innerHTML = `
-          <div>
-            <div class="label">${escapeHtml(q.text)}</div>
-            <div class="muted small">Deadline: <span class="deadline">${escapeHtml(q.deadline)}</span></div>
-          </div>
-          <div class="chip ${q.mandatory ? 'mandatory' : ''}">${q.mandatory ? 'Mandatory' : 'Optional'}</div>
-          <div class="answers">${answersHtml}</div>
-          <div><button type="button" class="clear-btn" data-clear="${q.id}">Clear</button></div>
-        `;
-        listEl.appendChild(row);
-      });
+function getCheckedAnswers(){
+  const map = new Map(); // qid -> { value, labelText, deadline }
+  getAllRows().forEach(row => {
+    const qid = row.dataset.qid;
+    const checked = row.querySelector('input[type=radio]:checked');
+    if (checked){
+      const label = row.querySelector('.label')?.textContent || qid;
+      const deadline = row.dataset.deadline || '';
+      map.set(qid, { value: checked.value, labelText: label, deadline });
     }
-    renderSection(listA, questionsA);
-    renderSection(listB, questionsB);
-
-    /************ UTILS ************/
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
-    function escapeAttr(s){ return String(s).replace(/"/g,'&quot;'); }
-    function isExpired(deadlineStr){
-      if (!deadlineStr) return false;
-      const d = new Date(deadlineStr);
-      if (isNaN(d)) return false;
-      return new Date() > d;
-    }
-    function getAllRows(){ return Array.from(document.querySelectorAll('.row')); }
-    function getCheckedAnswers(){
-      const map = new Map(); // qid -> { value, labelText, deadline }
-      getAllRows().forEach(row => {
-        const qid = row.dataset.qid;
-        const checked = row.querySelector('input[type=radio]:checked');
-        if (checked){
-          const label = row.querySelector('.label')?.textContent || qid;
-          const deadline = row.dataset.deadline || '';
-          map.set(qid, { value: checked.value, labelText: label, deadline });
-        }
-      });
-      return map;
-    }
-    function countBySection(answers){
-      let a=0,b=0;
-      for (const key of answers.keys()){
-        if (key.startsWith('A')) a++;
-        if (key.startsWith('B')) b++;
-      }
-      return { a, b, total: a+b };
-    }
-    function updateCounts(){
-      const answers = getCheckedAnswers();
-      const {a,b} = countBySection(answers);
-      document.getElementById('countA').textContent = `Answered: ${a} / 16`;
-      document.getElementById('countB').textContent = `Answered: ${b} / 50`;
-    }
-    function refreshExpiry(){
-      getAllRows().forEach(row => {
-        const expired = isExpired(row.dataset.deadline);
-        row.classList.toggle('expired', expired);
-        row.querySelectorAll('input[type=radio]').forEach(r => r.disabled = expired);
-        let chip = row.querySelector('.chip.expired-mark');
-        if (expired && !chip){
-          chip = document.createElement('span');
-          chip.className = 'chip expired expired-mark';
-          chip.textContent = 'Expired';
-          row.children[1].insertAdjacentElement('afterend', chip);
-        } else if (!expired && chip){ chip.remove(); }
-      });
-    }
-    function enforceMaxSelections(maxAllowed=12){
-      const answers = getCheckedAnswers();
-      const { total } = countBySection(answers);
-      const rows = getAllRows();
-      if (total >= maxAllowed){
-        rows.forEach(row => {
-          const qid = row.dataset.qid;
-          const radios = row.querySelectorAll('input[type=radio]');
-          const selected = answers.has(qid);
-          radios.forEach(r => { if (!selected && !r.checked) r.disabled = true; });
-        });
-      } else {
-        rows.forEach(row => {
-          const expired = row.classList.contains('expired');
-          row.querySelectorAll('input[type=radio]').forEach(r => r.disabled = expired);
-        });
-      }
-    }
-
-    // ---- Double support ----
-    const doubleSelect = document.getElementById('doubleSelect');
-    function refreshDoubleChoices(){
-      const answers = getCheckedAnswers();
-      const prev = doubleSelect.value;
-      doubleSelect.innerHTML = `<option value="">— No double —</option>`;
-      const ids = Array.from(answers.keys()).sort((a,b)=>{
-        if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
-        return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
-      });
-      ids.forEach(id=>{
-        const a = answers.get(id);
-        const opt = document.createElement('option');
-        opt.value = id;
-        opt.textContent = `${id} — ${a.labelText}`;
-        doubleSelect.appendChild(opt);
-      });
-      if (prev && answers.has(prev)){ doubleSelect.value = prev; }
-      else if (prev){ doubleSelect.value = ""; }
-    }
-    function getDoubleSelection(){
-      const qid = doubleSelect.value;
-      if (!qid) return null;
-      const answers = getCheckedAnswers();
-      if (!answers.has(qid)) return null;
-      return { qid, label: answers.get(qid).labelText, value: answers.get(qid).value };
-    }
-
-    function updateSummary(){
-      const container = document.getElementById('summary');
-      const answers = getCheckedAnswers();
-      if (answers.size === 0){
-        container.innerHTML = `<p class="muted small">Your selections will appear here.</p>`;
-        return;
-      }
-      const chosenA=[], chosenB=[];
-      for (const [qid,obj] of answers.entries()){
-        const bucket = qid.startsWith('A') ? chosenA : chosenB;
-        bucket.push({ qid, label: obj.labelText, val: obj.value });
-      }
-      chosenA.sort((x,y)=> x.qid.localeCompare(y.qid));
-      chosenB.sort((x,y)=> x.qid.localeCompare(y.qid));
-      const renderList = (title, arr) => `
-        <h3>${title}</h3>
-        ${arr.length ? `<ol class="summary-list">${arr.map(x=>`<li><strong>${escapeHtml(x.label)}:</strong> ${escapeHtml(x.val)}</li>`).join('')}</ol>` : `<p class="muted small">None selected.</p>`}
-      `;
-      const dbl = getDoubleSelection();
-      const dblHtml = dbl ? `<p class="chip" style="margin-top:10px;">Double: <strong>${escapeHtml(dbl.qid)} — ${escapeHtml(dbl.label)}</strong> (${escapeHtml(dbl.value)})</p>` : '';
-      container.innerHTML = renderList('NFL Games', chosenA) + renderList('College Games', chosenB) + dblHtml;
-    }
-
-    // Footer status box
-    function setStatus(valid){
-      const box = document.getElementById('statusBox');
-      if (!box) return;
-      if (valid){
-        box.textContent = 'BEAR DOWN!';
-        box.classList.remove('bad'); box.classList.add('good');
-      } else {
-        box.textContent = 'ERRORS DETECTED';
-        box.classList.remove('good'); box.classList.add('bad');
-      }
-    }
-
-    function validateAll(){
-      const errors = [];
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const answers = getCheckedAnswers();
-      const {a,b,total} = countBySection(answers);
-      const A1 = document.querySelector('input[name="A1"]:checked');
-      const B1 = document.querySelector('input[name="B1"]:checked');
-      const checklist = [];
-
-      if (name) checklist.push('✅ Name selected'); else { checklist.push('❌ Name not selected'); errors.push('Please choose your name.'); }
-      if (email && /\S+@\S+\.\S+/.test(email)) checklist.push('✅ Valid email provided'); else { checklist.push('❌ Email missing/invalid'); errors.push('Enter a valid email.'); }
-      if (A1) checklist.push('✅ Mandatory NFL game picked'); else { checklist.push('❌ Mandatory NFL game not picked'); errors.push('Select Mandatory NFL game'); }
-      if (B1) checklist.push('✅ Mandatory NCAA game picked'); else { checklist.push('❌ Mandatory NCAA game not picked'); errors.push('Select Mandatory NCAA game'); }
-      if (a >= 3) checklist.push('✅ ≥3 answers in NFL'); else { checklist.push(`❌ Only ${a} in NFL`); errors.push('Pick at least 3 NFL games'); }
-      if (b >= 3) checklist.push('✅ ≥3 answers in NCAA'); else { checklist.push(`❌ Only ${b} in NCAA`); errors.push('Pick at least 3 NCAA games'); }
-      if (total >= 7 && total <= 12) checklist.push(`✅ Total between 7 and 12 (now ${total})`);
-      else {
-        if (total < 7) { checklist.push(`❌ Total too low (${total}/7)`); errors.push('Pick at least 7 games total'); }
-        if (total > 12){ checklist.push(`❌ Total too high (${total}/12)`); errors.push('You have picked more than 12 games'); }
-      }
-
-      // Double (optional): if selected, must be among chosen
-      const dbl = getDoubleSelection();
-      if (dbl){
-        if (answers.has(dbl.qid)) checklist.push(`✅ Double is valid: ${dbl.qid}`);
-        else { checklist.push('❌ Double pick is not among your selections'); errors.push('Your double must be one of your selected answers.'); }
-      } else {
-        checklist.push('ℹ️ No double selected (optional)');
-      }
-
-      const ul = document.getElementById('errorList');
-      ul.innerHTML = '';
-      checklist.forEach(msg=>{
-        const li = document.createElement('li');
-        li.textContent = msg;
-        li.className = msg.startsWith('✅') ? 'ok' : (msg.startsWith('❌') ? 'bad' : '');
-        ul.appendChild(li);
-      });
-
-      const isValid = errors.length===0;
-      setStatus(isValid);
-
-      return {
-        valid: isValid,
-        name, email, answers,
-        doublePick: dbl,
-        emailText: buildEmailBody(name, email, answers, dbl)
-      };
-    }
-
-function buildEmailBody(name, email, answersMap, dbl){
- const keys = Array.from(answersMap.keys()).sort((a,b)=>{
-   if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
-   return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
- });
- const lines = [];
- lines.push(`Name: ${name}`);
- lines.push(`Email: ${email}`);
- lines.push(`Timestamp: ${new Date().toString()}`);
- if (dbl){ lines.push(`Double: ${dbl.qid} — ${dbl.label} (${dbl.value})`); }
- lines.push('');
- lines.push('Selections:');
- keys.forEach(k=>{
-   const row = document.querySelector(`.row[data-qid="${k}"]`);
-   const label = row?.querySelector('.label')?.textContent || k;
-   const v = answersMap.get(k).value;
-   const dl = answersMap.get(k).deadline || '';
-   const isDouble = (dbl && dbl.qid === k) ? ' [DOUBLE]' : '';
-   lines.push(`- ${label}: ${v}${isDouble}${dl ? ` (deadline ${dl})` : ''}`);
- });
- return lines.join('\n');
+  });
+  return map;
+}
+function countBySection(answers){
+  let a=0,b=0;
+  for (const key of answers.keys()){
+    if (key.startsWith('A')) a++;
+    if (key.startsWith('B')) b++;
+  }
+  return { a, b, total: a+b };
+}
+function updateCounts(){
+  const answers = getCheckedAnswers();
+  const {a,b} = countBySection(answers);
+  document.getElementById('countA').textContent = `Answered: ${a} / 16`;
+  document.getElementById('countB').textContent = `Answered: ${b} / 50`; } function refreshExpiry(){
+  getAllRows().forEach(row => {
+    const expired = isExpired(row.dataset.deadline);
+    row.classList.toggle('expired', expired);
+    row.querySelectorAll('input[type=radio]').forEach(r => r.disabled = expired);
+    let chip = row.querySelector('.chip.expired-mark');
+    if (expired && !chip){
+      chip = document.createElement('span');
+      chip.className = 'chip expired expired-mark';
+      chip.textContent = 'Expired';
+      row.children[1].insertAdjacentElement('afterend', chip);
+    } else if (!expired && chip){ chip.remove(); }
+  });
+}
+function enforceMaxSelections(maxAllowed=12){
+  const answers = getCheckedAnswers();
+  const { total } = countBySection(answers);
+  const rows = getAllRows();
+  if (total >= maxAllowed){
+    rows.forEach(row => {
+      const qid = row.dataset.qid;
+      const radios = row.querySelectorAll('input[type=radio]');
+      const selected = answers.has(qid);
+      radios.forEach(r => { if (!selected && !r.checked) r.disabled = true; });
+    });
+  } else {
+    rows.forEach(row => {
+      const expired = row.classList.contains('expired');
+      row.querySelectorAll('input[type=radio]').forEach(r => r.disabled = expired);
+    });
+  }
 }
 
-    function clearQuestion(qid){
-      document.querySelectorAll(`input[name="${qid}"]`).forEach(r => r.checked=false);
-      onChange();
-    }
-    function resetAll(){
-      document.getElementById('name').value = '';
-      document.getElementById('email').value = '';
-      document.getElementById('doubleSelect').value = '';
-      document.querySelectorAll('input[type=radio]').forEach(r => r.checked=false);
-      onChange();
-      window.scrollTo({ top:0, behavior:'smooth' });
-    }
+// Double
+const doubleSelect = document.getElementById('doubleSelect');
+function refreshDoubleChoices(){
+  const answers = getCheckedAnswers();
+  const prev = doubleSelect.value;
+  doubleSelect.innerHTML = `<option value="">— No double —</option>`;
+  const ids = Array.from(answers.keys()).sort((a,b)=>{
+    if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
+    return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
+  });
+  ids.forEach(id=>{
+    const a = answers.get(id);
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.textContent = `${id} — ${a.labelText}`;
+    doubleSelect.appendChild(opt);
+  });
+  if (prev && answers.has(prev)){ doubleSelect.value = prev; }
+  else if (prev){ doubleSelect.value = ""; } } function getDoubleSelection(){
+  const qid = doubleSelect.value;
+  if (!qid) return null;
+  const answers = getCheckedAnswers();
+  if (!answers.has(qid)) return null;
+  return { qid, label: answers.get(qid).labelText, value: answers.get(qid).value }; }
 
-    /************ EVENTS ************/
-    function onChange(){
-      refreshExpiry();
-      updateCounts();
-      enforceMaxSelections(12);
-      refreshDoubleChoices();
-      updateSummary();
-      validateAll();
-    }
+// Summary & status
+function updateSummary(){
+  const container = document.getElementById('summary');
+  const answers = getCheckedAnswers();
+  if (answers.size === 0){
+    container.innerHTML = `<p class="muted small">Your selections will appear here.</p>`;
+    return;
+  }
+  const chosenA=[], chosenB=[];
+  for (const [qid,obj] of answers.entries()){
+    const bucket = qid.startsWith('A') ? chosenA : chosenB;
+    bucket.push({ qid, label: obj.labelText, val: obj.value });
+  }
+  chosenA.sort((x,y)=> x.qid.localeCompare(y.qid));
+  chosenB.sort((x,y)=> x.qid.localeCompare(y.qid));
+  const renderList = (title, arr) => `
+    <h3>${title}</h3>
+    ${arr.length ? `<ol class="summary-list">${arr.map(x=>`<li><strong>${escapeHtml(x.label)}:</strong> ${escapeHtml(x.val)}</li>`).join('')}</ol>` : `<p class="muted small">None selected.</p>`}
+  `;
+  const dbl = getDoubleSelection();
+  const dblHtml = dbl ? `<p class="chip" style="margin-top:10px;">Double: <strong>${escapeHtml(dbl.qid)} — ${escapeHtml(dbl.label)}</strong> (${escapeHtml(dbl.value)})</p>` : '';
+  container.innerHTML = renderList('NFL Games', chosenA) + renderList('College Games', chosenB) + dblHtml; } function setStatus(valid){
+  const box = document.getElementById('statusBox');
+  if (!box) return;
+  if (valid){ box.textContent = 'BEAR DOWN!'; box.classList.remove('bad'); box.classList.add('good'); }
+  else { box.textContent = 'ERRORS DETECTED'; box.classList.remove('good'); box.classList.add('bad'); } } function validateAll(){
+  const errors = [];
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const answers = getCheckedAnswers();
+  const {a,b,total} = countBySection(answers);
+  const A1 = document.querySelector('input[name="A1"]:checked');
+  const B1 = document.querySelector('input[name="B1"]:checked');
+  const checklist = [];
 
-    document.addEventListener('change', e=>{
-      if (e.target.matches('#name')){
-        const n = e.target.value.trim();
-        const emailInput = document.getElementById('email');
-        const mapped = NAME_EMAILS[n];
-        if (mapped){ emailInput.value = mapped; }
-      }
-      if (e.target.matches('#name, #email, input[type=radio], #doubleSelect')) onChange();
-    });
+  if (name) checklist.push('✅ Name selected'); else { checklist.push('❌ Name not selected'); errors.push('Please choose your name.'); }
+  if (email && /\S+@\S+\.\S+/.test(email)) checklist.push('✅ Valid email provided'); else { checklist.push('❌ Email missing/invalid'); errors.push('Enter a valid email.'); }
+  if (A1) checklist.push('✅ Mandatory NFL game picked'); else { checklist.push('❌ Mandatory NFL game not picked'); errors.push('Select Mandatory NFL game'); }
+  if (B1) checklist.push('✅ Mandatory NCAA game picked'); else { checklist.push('❌ Mandatory NCAA game not picked'); errors.push('Select Mandatory NCAA game'); }
+  if (a >= 3) checklist.push('✅ ≥3 answers in NFL'); else { checklist.push(`❌ Only ${a} in NFL`); errors.push('Pick at least 3 NFL games'); }
+  if (b >= 3) checklist.push('✅ ≥3 answers in NCAA'); else { checklist.push(`❌ Only ${b} in NCAA`); errors.push('Pick at least 3 NCAA games'); }
+  if (total >= 7 && total <= 12) checklist.push(`✅ Total between 7 and 12 (now ${total})`);
+  else {
+    if (total < 7) { checklist.push(`❌ Total too low (${total}/7)`); errors.push('Pick at least 7 games total'); }
+    if (total > 12){ checklist.push(`❌ Total too high (${total}/12)`); errors.push('You have picked more than 12 games'); }
+  }
 
-    document.addEventListener('click', e=>{
-      if (e.target.matches('[data-clear]')){ clearQuestion(e.target.getAttribute('data-clear')); }
-    });
+  const dbl = getDoubleSelection();
+  if (dbl){
+    if (answers.has(dbl.qid)) checklist.push(`✅ Double is valid: ${dbl.qid}`);
+    else { checklist.push('❌ Double pick is not among your selections'); errors.push('Your double must be one of your selected answers.'); }
+  } else checklist.push('ℹ️ No double selected (optional)');
 
-    document.getElementById('resetBtn').addEventListener('click', resetAll);
+  const ul = document.getElementById('errorList');
+  ul.innerHTML = '';
+  checklist.forEach(msg=>{
+    const li = document.createElement('li');
+    li.textContent = msg;
+    li.className = msg.startsWith('✅') ? 'ok' : (msg.startsWith('❌') ? 'bad' : '');
+    ul.appendChild(li);
+  });
 
-    // EmailJS init
-    document.addEventListener('DOMContentLoaded', () => {
-      if (EMAILJS_PUBLIC_KEY && window.emailjs) {
-        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-      }
-      refreshExpiry(); updateCounts(); enforceMaxSelections(12); refreshDoubleChoices(); updateSummary(); validateAll();
-    });
+  setStatus(errors.length===0);
+  return { valid: errors.length===0, name, email, answers }; }
 
-    // Submit (single email to organizer, CC participant via template)
-   
+// Build the **minimal** email body (easy for Excel/VBA to parse) function buildEmailBodyMinimal(name, email, answersMap, dbl, week){
+  const keys = Array.from(answersMap.keys()).sort((a,b)=>{
+    if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
+    return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
+  });
+  const ts = new Date().toISOString();
+  const lines = [];
+  lines.push(`Name: ${name}`);
+  lines.push(`Email: ${email}`);
+  lines.push(`Week: ${week}`);
+  lines.push(`Timestamp: ${ts}`);
+  lines.push('');
+  lines.push('Selections:');
+  keys.forEach(qid=>{
+    const choice = answersMap.get(qid).value;
+    const isDouble = (dbl && dbl.qid === qid) ? ' [DOUBLE]' : '';
+    lines.push(`${qid}:${choice}${isDouble}`);
+  });
+  return lines.join('\n');
+}
 
-document.getElementById('submitBtn').addEventListener('click', async (e)=>{
+// Optional CSV (handy to copy from the email into Excel) function buildSelectionsCSV(week, name, email, answersMap, dbl){
+  const ts = new Date().toISOString();
+  const keys = Array.from(answersMap.keys()).sort((a,b)=>{
+    if (a[0] !== b[0]) return a[0].localeCompare(b[0]);
+    return parseInt(a.slice(1),10) - parseInt(b.slice(1),10);
+  });
+  const header = 'Timestamp,Week,Name,Email,QID,Choice,IsDouble';
+  const rows = keys.map(qid=>{
+    const choice = String(answersMap.get(qid).value).replace(/"/g,'""');
+    const isDouble = (dbl && dbl.qid === qid) ? 'TRUE' : 'FALSE';
+    return `"${ts}",${week},"${name}","${email}","${qid}","${choice}",${isDouble}`;
+  });
+  return [header, ...rows].join('\n');
+}
 
+/************ EVENTS ************/
+function onChange(){
+  refreshExpiry();
+  updateCounts();
+  enforceMaxSelections(12);
+  refreshDoubleChoices();
+  updateSummary();
+  validateAll();
+}
+document.addEventListener('change', e=>{
+  if (e.target.matches('#name')){
+    const n = e.target.value.trim();
+    const emailInput = document.getElementById('email');
+    const mapped = NAME_EMAILS[n];
+    if (mapped){ emailInput.value = mapped; }
+  }
+  if (e.target.matches('#name, #email, input[type=radio], #doubleSelect')) onChange(); }); document.addEventListener('click', e=>{
+  if (e.target.matches('[data-clear]')){
+    document.querySelectorAll(`input[name="${e.target.getAttribute('data-clear')}"]`).forEach(r => r.checked=false);
+    onChange();
+  }
+});
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  document.getElementById('name').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('doubleSelect').value = '';
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked=false);
+  onChange();
+  window.scrollTo({ top:0, behavior:'smooth' }); });
+
+// EmailJS init
+document.addEventListener('DOMContentLoaded', () => {
+  if (EMAILJS_PUBLIC_KEY && window.emailjs) emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  refreshExpiry(); updateCounts(); enforceMaxSelections(12); refreshDoubleChoices(); updateSummary(); validateAll();
+  setInterval(()=>{ refreshExpiry(); updateCounts(); enforceMaxSelections(12); refreshDoubleChoices(); updateSummary(); validateAll(); }, 60000); });
+
+// Submit (single email to you; CC handled by your EmailJS template) document.getElementById('submitBtn').addEventListener('click', async (e)=>{
   e.preventDefault();
-
   const { valid, name, email, answers } = validateAll();
+  if (!valid){ alert('Please fix the items in “Checks & Errors” before submitting.'); return; }
 
-  if (!valid){
+  const dbl = getDoubleSelection();
+  const emailText = buildEmailBodyMinimal(name, email, answers, dbl, CURRENT_WEEK);
+  const csvBlock  = buildSelectionsCSV(CURRENT_WEEK, name, email, answers, dbl); // optional
 
-    alert('Please fix the items in “Checks & Errors” before submitting.');
-
-    return;
-
-  }
-
-  // --- Send the email (you can move this after the sheet log if you prefer) ---
-
-  try {
-
+  try{
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-
       organizer_email: ORGANIZER_EMAIL,
-
       participant_name: name,
-
       participant_email: email,
-
-      selections_text: buildEmailBody(name, email, answers, getDoubleSelection())
-
+      week: CURRENT_WEEK,
+      selections_text: emailText,   // minimal lines (Name, Email, Week, Timestamp, QID:Answer)
+      selections_csv: csvBlock      // optional CSV block in the email
     });
-
-  } catch (err) {
-
+  }catch(err){
     console.error('EmailJS error:', err);
-
     alert('There was an error sending the email. Please try again.');
-
     return;
-
   }
-
-  // --- Build the selections array for Sheets ---
-
-  const selections = [];
-
-  for (const [qid, obj] of answers.entries()) {
-
-    selections.push({ qid, question: obj.labelText, choice: obj.value });
-
-  }
-
-  const dbl = getDoubleSelection(); // {qid,label,value} or null
-
-  
 
   alert('Submitted!');
-
-  // Optional redirect to a results/thanks page:
-
-  // window.location.href = "/your-repo/results.html?week=" + CURRENT_WEEK;
-
-});
-</script>
- 
-
-
-    // periodic expiry refresh
-    setInterval(()=>{ refreshExpiry(); updateCounts(); enforceMaxSelections(12); refreshDoubleChoices(); updateSummary(); validateAll(); }, 60000);
+  // Optional: redirect after submit
+  // window.location.href = "/results.html?week=" + CURRENT_WEEK; });
   </script>
 </body>
 </html>
+
+
