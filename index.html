@@ -301,6 +301,7 @@
     const CURRENT_WEEK = 1; // change each week (1..13)
     const SHEET_WEBAPP_URL = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLj46zj-N6IyxNrGg33iFEkcGekzLu7bvDjx5hEakK22dhaH54Yu4DV95shPijsJrxzkB93BToUKMsCeXZ9-0Dvdcaoo-0UUWZUQxpWvH32tWtNKRPeEzCWuR1OaDAFOA9VPo2gHhp6kLPUw3EP2TR391aHvFfF1iPCQ_gONmvW5Tah_Dh1_9gT215LJchmXdIOcdJUT-dJuXiKPjtgZW9uh_pcxk9-QJ-A19xN1nYK2FkcNZbLu-MUPw0glFQDlmBwUwU5bRhnxIBMHbhua-0t_yHZYHg&lib=M-6njM1ActlpSFRYluh_hdDKUQMgyDvg9"; // your /exec URL
 
+
     const questionsA = [
       { id:"A1", text:"Raiders @ Cardinals (-7) Saturday @ 10:00 PM - NFL+", choices:["Raiders","Cardinals (-7)"], deadline:"2025-08-23T22:0", mandatory:true },
 { id:"A2", text:"Steelers (-3) @ Panthers Thursday @ 7:00 PM - NFL+", choices:["Steelers (-3)","Panthers"], deadline:"2025-08-21T19:0", mandatory:false },
@@ -734,36 +735,9 @@ document.getElementById('submitBtn').addEventListener('click', async (e)=>{
 
   const dbl = getDoubleSelection(); // {qid,label,value} or null
 
-  // --- Log to Google Sheets via Apps Script Web App ---
-try {
- const resp = await fetch(SHEET_WEBAPP_URL, {
-   method: "POST",
-   headers: {"Content-Type":"application/json"},
-   body: JSON.stringify({
-     type: "submission",
-     week: CURRENT_WEEK,
-     participant_name: name,
-     participant_email: email,
-     double_qid: dbl ? dbl.qid : null,
-     selections
-   })
- });
- const text = await resp.text();            // read body once
- let data;
- try { data = JSON.parse(text); } catch { data = null; }
- console.log("Sheets POST status:", resp.status, text);
- if (!resp.ok || !data || data.ok !== true) {
-   alert("Google Sheets logging failed.\n\nHTTP " + resp.status + "\n" + text +
-         "\n\nCheck your Apps Script deployment access & URL.");
-   return; // stop here so you know it failed
- }
-} catch (err){
- console.error('Sheet log failed:', err);
- alert('Could not reach the Google Sheets Web App. See console for details.');
- return;
-}
+  
 
-  alert('Submitted! Email sent and picks logged.');
+  alert('Submitted!');
 
   // Optional redirect to a results/thanks page:
 
